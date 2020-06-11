@@ -54,6 +54,16 @@ body {
     font-size:20px;
     font-family:New Century Schoolbook, serif;
 }
+{
+    background-image:url(running.png);
+    background-repeat:no-repeat;
+    height:53px;
+    width:750px;
+    padding-bottom:15px;
+    text-align:center;
+    margin:0 auto 0 auto;
+}
+
 
 #header h2
 {
