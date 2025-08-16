@@ -1,35 +1,111 @@
-
-<!DOCTYPE html
-        <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="style.css" />
-
-<title>Home</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aaron Chu – Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
-
 <body>
-<center>
-<div id="page">
-
-    <div id="header">
-        <h1>Aaron(初荣恩）</h1>
-        <h2>Home</h2>
-
+  <canvas id="bgCanvas"></canvas>
+  <header class="navbar">
+    <div class="logo">Aaron Chu</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#basketball">Basketball</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <section class="hero" data-aos="fade-up">
+    <h1>Hi, I’m Aaron(初荣恩) 👋</h1>
+    <p>Engineer. Hooper. Barber.</p>
+    <img src="me.png" alt="Aaron Chu" class="hero-photo" />
+  </section>
+  <section id="about" class="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <p>I am a student at Rutgers University from the Bay Area, studying Computer Engineering with a minor in Computer Science. I enjoy building practical projects that have real-world applications. Outside of school, I am passionate about basketball, having played at high levels in high school, and I currently participate in intramural games and formerly played on the Rutgers club team. Additionally, I am a self-taught barber, a skill I began in 2023, and I have built a loyal client base since then. Feel free to explore my projects below or visit my LinkedIn to see more of my experiences.</p>
+  </section>
+  <section id="projects" class="projects" data-aos="fade-up">
+    <h2>Projects</h2>
+    <p class="project-note">*Aurabeats and CampusKart are currently works in progress.*</p>
+    <div class="project-grid">
+      <div class="project-card" data-aos="zoom-in">
+        <h3>CampusKart</h3>
+        <p>An iOS marketplace app for college students to safely buy/sell items on campus.</p>
+      </div>
+      <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+        <h3>AuraBeats</h3>
+        <p>A Spotify-connected app that creates personalized playlists based on your mood and vibe.</p>
+      </div>
+      <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
+        <h3>React Planner</h3>
+        <p>
+          A day-based task scheduler built with React and Vite. Features hourly time slots (8:00–24:00), add/edit/delete tasks, persistent storage via LocalStorage, and optional custom CSS injection for advanced styling.
+        </p>
+        <p>
+          <a href="https://aarochu.github.io/React-Planner/" target="_blank">View Live</a>
+        </p>
+      </div>
+      <div class="project-card">
+        <h3>Zipply</h3>
+        <p>
+          A real-time chat application built with React and Firebase. Supports user authentication, instant messaging, and responsive design across devices.
+        </p>
+        <a href="https://youtu.be/cMtewBdzU84" target="_blank">Video Demo</a>
+      </div>
+      <div class="project-card">
+        <h3>SuperHearo</h3>
+        <p>
+          In a team of 4, created an Android app called “SuperHearo”: a voice-controlled AI targeted for the elderly & the blind.
+          The app uses speech recognition and AI to assist users with daily tasks, improving accessibility and independence.
+        </p>
+        <p>
+          <a href="https://github.com/joshnaim1/SuperHearo" target="_blank">Source code</a>
+        </p>
+      </div>
     </div>
-    <div id="bar">
-        <ul>
-            <li><a href="http://aarochu.github.io">Home</a></li>
-            <li><a href="http://aarochu.github.io/pleasure/">Pleasure</a></li>
-            <li><a href="http://aarochu.github.io/projects/">Projects</a></li>
-            <li><a href="http://aarochu.github.io/contact/">Contact</a></li>
-        </ul>
+  </section>
+  <section id="basketball" class="basketball" data-aos="fade-up">
+    <h2>Basketball</h2>
+    <p>A few of my basketball highlights</p>
+    <div class="basketball-highlights">
+      <video width="100%" height="315" controls>
+        <source src="hoops.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <video width="100%" height="315" controls>
+        <source src="hoops2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <video width="100%" height="315" controls>
+        <source src="hoops3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
-    <div class="contentLabel"><h1>About me</h1></div>
-    <div class="contentPara">
-        <img src="eat.jpg"  class="img-responsive" alt="Cooking">
-        <p>I am a young lad in the Bay Area. I enjoy playing basketball, video games, sleeping, eating unhealthy foods, and reading fantasy books. I was born at a very young age and lived in Cali for all of my life(Cali baby). I want to be an software engineer when I grow up but also get connected to basketball as much as possible. My favorite movies are in the <a href="https://www.starwars.com/">Star Wars</a> and <a href="https://www.marvel.com/">Marvel</a> series and some Disney Movies. I hope you enjoyed reading this and remember, don't take life too seriously. Nobody gets out alive anyways🙄.
+  </section>
+  <section id="contact" class="contact" data-aos="fade-up">
+    <h2>Contact</h2>
+    <div class="contact-buttons">
+      <a href="https://github.com/aarochu" target="_blank" class="icon-btn" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/achu02/" target="_blank" class="icon-btn" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
     </div>
-</div>
-</center>
+  </section>
+  <script src="background.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: false
+    });
+  </script>
 </body>
 </html>
