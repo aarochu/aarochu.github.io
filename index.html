@@ -6,106 +6,177 @@
   <title>Aaron Chu – Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
-<body>
-  <canvas id="bgCanvas"></canvas>
-  <header class="navbar">
-    <div class="logo">Aaron Chu</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#basketball">Basketball</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <section class="hero" data-aos="fade-up">
-    <h1>Hi, I’m Aaron(初荣恩) 👋</h1>
-    <p>Engineer. Hooper. Barber.</p>
-    <img src="me.png" alt="Aaron Chu" class="hero-photo" />
-  </section>
-  <section id="about" class="about" data-aos="fade-up">
-    <h2>About Me</h2>
-    <p>I am a student at Rutgers University from the Bay Area, studying Computer Engineering with a minor in Computer Science. I enjoy building practical projects that have real-world applications. Outside of school, I am passionate about basketball, having played at high levels in high school, and I currently participate in intramural games and formerly played on the Rutgers club team. Additionally, I am a self-taught barber, a skill I began in 2023, and I have built a loyal client base since then. Feel free to explore my projects below or visit my LinkedIn to see more of my experiences.</p>
-  </section>
-  <section id="projects" class="projects" data-aos="fade-up">
-    <h2>Projects</h2>
-    <p class="project-note">*Aurabeats and CampusKart are currently works in progress.*</p>
-    <div class="project-grid">
-      <div class="project-card" data-aos="zoom-in">
-        <h3>CampusKart</h3>
-        <p>An iOS marketplace app for college students to safely buy/sell items on campus.</p>
+<body class="os-body">
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <div id="desktop" class="desktop-surface" aria-label="Desktop">
+    <div class="desk-icons" role="toolbar" aria-label="Desktop shortcuts">
+      <button type="button" class="desk-icon" data-window="welcome" aria-label="Welcome — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-house" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">Welcome</span>
+      </button>
+      <button type="button" class="desk-icon" data-window="about" aria-label="About Me — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-user" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">About Me</span>
+      </button>
+      <button type="button" class="desk-icon" data-window="projects" aria-label="Projects — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">Projects</span>
+      </button>
+      <button type="button" class="desk-icon" data-window="basketball" aria-label="Basketball — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-basketball" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">Basketball</span>
+      </button>
+      <button type="button" class="desk-icon" data-window="contact" aria-label="Contact — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-envelope" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">Contact</span>
+      </button>
+    </div>
+
+    <!-- Windows -->
+    <div class="desk-window" id="win-welcome" data-window-id="welcome" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">Welcome</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
       </div>
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-        <h3>AuraBeats</h3>
-        <p>A Spotify-connected app that creates personalized playlists based on your mood and vibe.</p>
-      </div>
-      <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
-        <h3>React Planner</h3>
-        <p>
-          A day-based task scheduler built with React and Vite. Features hourly time slots (8:00–24:00), add/edit/delete tasks, persistent storage via LocalStorage, and optional custom CSS injection for advanced styling.
-        </p>
-        <p>
-          <a href="https://aarochu.github.io/React-Planner/" target="_blank">View Live</a>
-        </p>
-      </div>
-      <div class="project-card">
-        <h3>Zipply</h3>
-        <p>
-          A real-time chat application built with React and Firebase. Supports user authentication, instant messaging, and responsive design across devices.
-        </p>
-        <a href="https://youtu.be/cMtewBdzU84" target="_blank">Video Demo</a>
-      </div>
-      <div class="project-card">
-        <h3>SuperHearo</h3>
-        <p>
-          In a team of 4, created an Android app called “SuperHearo”: a voice-controlled AI targeted for the elderly & the blind.
-          The app uses speech recognition and AI to assist users with daily tasks, improving accessibility and independence.
-        </p>
-        <p>
-          <a href="https://github.com/joshnaim1/SuperHearo" target="_blank">Source code</a>
-        </p>
+      <div class="desk-window-body">
+        <section class="win-section hero">
+          <h1>Hi, I’m Aaron(初荣恩)</h1>
+          <p>Engineer. Hooper. Barber.</p>
+          <img src="me.png" alt="Aaron Chu" class="hero-photo" />
+        </section>
       </div>
     </div>
-  </section>
-  <section id="basketball" class="basketball" data-aos="fade-up">
-    <h2>Basketball</h2>
-    <p>A few of my basketball highlights</p>
-    <div class="basketball-highlights">
-      <video width="100%" height="315" controls>
-        <source src="hoops.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <video width="100%" height="315" controls>
-        <source src="hoops2.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <video width="100%" height="315" controls>
-        <source src="hoops3.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+
+    <div class="desk-window" id="win-about" data-window-id="about" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">About Me</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="desk-window-body">
+        <section class="win-section about">
+          <h2>About Me</h2>
+          <p>I am a student at Rutgers University from the Bay Area, studying Computer Engineering with a minor in Computer Science. I enjoy building practical projects that have real-world applications. Outside of school, I am passionate about basketball, having played at high levels in high school, and I currently participate in intramural games and formerly played on the Rutgers club team. Additionally, I am a self-taught barber, a skill I began in 2023, and I have built a loyal client base since then. Feel free to explore my projects below or visit my LinkedIn to see more of my experiences.</p>
+        </section>
+      </div>
     </div>
-  </section>
-  <section id="contact" class="contact" data-aos="fade-up">
-    <h2>Contact</h2>
-    <div class="contact-buttons">
-      <a href="https://github.com/aarochu" target="_blank" class="icon-btn" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/achu02/" target="_blank" class="icon-btn" aria-label="LinkedIn">
-        <i class="fab fa-linkedin"></i>
-      </a>
+
+    <div class="desk-window" id="win-projects" data-window-id="projects" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">Projects</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="desk-window-body">
+        <section class="win-section projects">
+          <h2>Projects</h2>
+          <div class="project-grid">
+            <div class="project-card">
+              <h3>VeriStudent</h3>
+              <p>Full stack marketplace style app for college students that makes it easy to safely buy and sell textbooks and find sublets. Students sign in with Google using a dot edu email, complete a simple profile, and post listings with images, prices, and pickup or sublet details. The frontend is built with React and Expo and deployed to Vercel, with a Supabase Postgres backend handling users, listings, messages, image storage, and real time chat between buyers and sellers.</p>
+            </div>
+            <div class="project-card">
+              <h3>Run Club Website</h3>
+              <p>Built a responsive club website using React and TypeScript, integrated Supabase for authentication and real-time data, and implemented Resend API for automated email notifications. Designed with Tailwind CSS and deployed on GitHub Pages.</p>
+              <p><a href="https://2fasttclub.github.io" target="_blank" rel="noopener noreferrer">View Live</a></p>
+            </div>
+            <div class="project-card">
+              <h3>React Planner</h3>
+              <p>A day-based task scheduler built with React and Vite. Features hourly time slots (8:00–24:00), add/edit/delete tasks, persistent storage via LocalStorage, and optional custom CSS injection for advanced styling.</p>
+              <p><a href="https://aarochu.github.io/React-Planner/" target="_blank" rel="noopener noreferrer">View Live</a></p>
+            </div>
+            <div class="project-card">
+              <h3>Zipply</h3>
+              <p>A real-time chat application built with React and Firebase. Supports user authentication, instant messaging, and responsive design across devices.</p>
+              <a href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Video Demo</a>
+            </div>
+            <div class="project-card">
+              <h3>SuperHearo</h3>
+              <p>In a team of 4, created an Android app called “SuperHearo”: a voice-controlled AI targeted for the elderly &amp; the blind. The app uses speech recognition and AI to assist users with daily tasks, improving accessibility and independence.</p>
+              <p><a href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Source code</a></p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
-  </section>
+
+    <div class="desk-window" id="win-basketball" data-window-id="basketball" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">Basketball</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="desk-window-body">
+        <section class="win-section basketball">
+          <h2>Basketball</h2>
+          <p>A few of my basketball highlights</p>
+          <div class="basketball-highlights">
+            <video width="100%" height="315" controls>
+              <source src="hoops.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <video width="100%" height="315" controls>
+              <source src="hoops2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <video width="100%" height="315" controls>
+              <source src="hoops3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="desk-window" id="win-contact" data-window-id="contact" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">Contact</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="desk-window-body">
+        <section class="win-section contact">
+          <h2>Contact</h2>
+          <div class="contact-buttons">
+            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer class="taskbar" role="contentinfo">
+    <div class="taskbar-brand"><i class="fas fa-terminal" aria-hidden="true"></i> Aaron Chu</div>
+    <div id="taskbar-tray" class="taskbar-tray" aria-label="Open windows"></div>
+    <div id="taskbar-clock" class="taskbar-clock" aria-live="polite"></div>
+  </footer>
+
   <script src="background.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      once: false
-    });
-  </script>
+  <script src="desktop.js"></script>
 </body>
 </html>
