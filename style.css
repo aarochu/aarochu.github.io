@@ -30,14 +30,15 @@ body.os-body {
   overflow: hidden;
 }
 
-/* Desktop icons — column like classic OS */
+/* Desktop icons — column like classic OS with safe wrapping */
 .desk-icons {
   position: absolute;
   top: 1rem;
   left: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 0.35rem;
   z-index: 2;
   max-height: calc(100% - 2rem);
@@ -296,6 +297,18 @@ body.os-body {
 }
 
 .project-card a:hover {
+  text-decoration: underline;
+  color: #d4e2ff;
+}
+
+.project-link {
+  display: inline-block;
+  color: #a8c8ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-link:hover {
   text-decoration: underline;
   color: #d4e2ff;
 }

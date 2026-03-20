@@ -12,6 +12,7 @@
     projects: { left: 200, top: 72, width: 640, height: 520 },
     basketball: { left: 140, top: 88, width: 520, height: 440 },
     contact: { left: 220, top: 120, width: 360, height: 260 },
+    resume: { left: 180, top: 140, width: 640, height: 520 },
   };
 
   function staggerOffset(index) {

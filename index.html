@@ -18,6 +18,10 @@
         <span class="desk-icon-glyph"><i class="fas fa-house" aria-hidden="true"></i></span>
         <span class="desk-icon-label">Welcome</span>
       </button>
+      <button type="button" class="desk-icon" data-window="resume" aria-label="Resume — double-click to open">
+        <span class="desk-icon-glyph"><i class="fas fa-file-pdf" aria-hidden="true"></i></span>
+        <span class="desk-icon-label">Resume</span>
+      </button>
       <button type="button" class="desk-icon" data-window="about" aria-label="About Me — double-click to open">
         <span class="desk-icon-glyph"><i class="fas fa-user" aria-hidden="true"></i></span>
         <span class="desk-icon-label">About Me</span>
@@ -165,6 +169,25 @@
               <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
           </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="desk-window" id="win-resume" data-window-id="resume" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <span class="desk-window-title">Resume</span>
+        <div class="desk-window-controls">
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="desk-window-body">
+        <section class="win-section resume">
+          <h2>Resume</h2>
+          <p>Here is my resume, I am always looking for work :D</p>
+          <p><a class="project-link" href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Open/Download PDF</a></p>
+          <iframe src="AaronChu2026.pdf" width="100%" height="calc(100% - 86px)" style="border:1px solid #666;" title="Resume PDF Preview"></iframe>
         </section>
       </div>
     </div>
