@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="os-body">
-  <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
   <div id="desktop" class="desktop-surface" aria-label="Desktop">
     <div class="desk-icons" role="toolbar" aria-label="Desktop shortcuts">
@@ -162,10 +161,10 @@
         <section class="win-section contact">
           <h2>Contact</h2>
           <div class="contact-buttons">
-            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub" data-tooltip="GitHub">
               <i class="fab fa-github" aria-hidden="true"></i>
             </a>
-            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn" data-tooltip="LinkedIn">
               <i class="fab fa-linkedin" aria-hidden="true"></i>
             </a>
           </div>
@@ -196,10 +195,20 @@
   <footer class="taskbar" role="contentinfo">
     <div class="taskbar-brand"><i class="fas fa-terminal" aria-hidden="true"></i> Aaron Chu</div>
     <div id="taskbar-tray" class="taskbar-tray" aria-label="Open windows"></div>
+    <button
+      type="button"
+      id="theme-toggle"
+      class="theme-toggle"
+      aria-label="Switch to light mode"
+      aria-pressed="false"
+      title="Toggle light mode"
+    >
+      <i class="fas fa-sun" aria-hidden="true"></i>
+      <span>Light</span>
+    </button>
     <div id="taskbar-clock" class="taskbar-clock" aria-live="polite"></div>
   </footer>
 
-  <script src="background.js"></script>
   <script src="desktop.js"></script>
 </body>
 </html>

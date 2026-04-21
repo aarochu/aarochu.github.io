@@ -12,11 +12,9 @@ body.os-body {
   overflow: hidden;
 }
 
-#bgCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+body.os-body[data-theme="light"] {
+  color: #1f2a44;
+  background: #f3f6fd;
 }
 
 /* Desktop area (above taskbar) */
@@ -333,6 +331,7 @@ body.os-body {
 }
 
 .icon-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -350,6 +349,31 @@ body.os-body {
 .icon-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
+}
+
+.icon-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 0.2rem 0.45rem;
+  border-radius: 5px;
+  font-size: 0.68rem;
+  line-height: 1.2;
+  color: #f6f9ff;
+  background: rgba(15, 18, 28, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.icon-btn:hover::after,
+.icon-btn:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Taskbar */
@@ -432,6 +456,170 @@ body.os-body {
   padding: 0 0.35rem;
   min-width: 3.5rem;
   text-align: right;
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 32px;
+  padding: 0 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #dbe5ff;
+  font: inherit;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  outline: none;
+}
+
+body.os-body[data-theme="light"] .desk-icon {
+  color: #243453;
+}
+
+body.os-body[data-theme="light"] .desk-icon:hover,
+body.os-body[data-theme="light"] .desk-icon:focus-visible {
+  background: rgba(62, 90, 150, 0.08);
+  box-shadow: 0 0 0 1px rgba(62, 90, 150, 0.22);
+}
+
+body.os-body[data-theme="light"] .desk-icon.selected {
+  background: rgba(120, 165, 255, 0.24);
+  box-shadow: 0 0 0 1px rgba(86, 130, 220, 0.4);
+}
+
+body.os-body[data-theme="light"] .desk-icon-glyph {
+  background: linear-gradient(160deg, rgba(240, 245, 255, 0.92), rgba(212, 224, 248, 0.9));
+  border: 1px solid rgba(70, 100, 160, 0.26);
+  box-shadow: 0 6px 16px rgba(80, 100, 135, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  color: #2f4a79;
+}
+
+body.os-body[data-theme="light"] .desk-icon-label {
+  text-shadow: none;
+}
+
+body.os-body[data-theme="light"] .desk-window {
+  background: linear-gradient(180deg, rgba(251, 253, 255, 0.97), rgba(238, 245, 255, 0.99));
+  border: 1px solid rgba(75, 100, 145, 0.2);
+  box-shadow:
+    0 20px 44px rgba(84, 110, 153, 0.24),
+    0 0 0 1px rgba(115, 140, 186, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.os-body[data-theme="light"] .desk-window-titlebar {
+  background: linear-gradient(180deg, #edf3ff, #dfe9ff);
+  border-bottom: 1px solid rgba(75, 100, 145, 0.22);
+}
+
+body.os-body[data-theme="light"] .desk-window-title {
+  color: #294069;
+}
+
+body.os-body[data-theme="light"] .win-btn {
+  background: rgba(62, 90, 150, 0.12);
+  color: #294069;
+}
+
+body.os-body[data-theme="light"] .win-btn:hover {
+  background: rgba(62, 90, 150, 0.22);
+  color: #1d2f50;
+}
+
+body.os-body[data-theme="light"] .win-btn-close:hover {
+  background: #d74646;
+  color: #fff;
+}
+
+body.os-body[data-theme="light"] .win-section h1,
+body.os-body[data-theme="light"] .win-section h2 {
+  color: #1d2f50;
+}
+
+body.os-body[data-theme="light"] .win-section p {
+  color: #293c5e;
+  opacity: 1;
+}
+
+body.os-body[data-theme="light"] .project-card {
+  background: linear-gradient(180deg, rgba(244, 249, 255, 0.95), rgba(231, 240, 255, 0.95));
+  border: 1px solid rgba(75, 100, 145, 0.2);
+  box-shadow: 0 8px 20px rgba(84, 110, 153, 0.2);
+}
+
+body.os-body[data-theme="light"] .project-card h3 {
+  color: #1d2f50;
+}
+
+body.os-body[data-theme="light"] .project-card a,
+body.os-body[data-theme="light"] .project-link {
+  color: #2554a8;
+}
+
+body.os-body[data-theme="light"] .icon-btn {
+  color: #23406d;
+  border: 1px solid rgba(75, 100, 145, 0.25);
+  background: rgba(62, 90, 150, 0.1);
+}
+
+body.os-body[data-theme="light"] .icon-btn:hover,
+body.os-body[data-theme="light"] .icon-btn:focus-visible {
+  color: #152c4f;
+  background: rgba(62, 90, 150, 0.22);
+}
+
+body.os-body[data-theme="light"] .taskbar {
+  background: linear-gradient(180deg, #e7eefc 0%, #d9e5fb 100%);
+  border-top: 1px solid rgba(75, 100, 145, 0.25);
+  box-shadow: 0 -8px 24px rgba(84, 110, 153, 0.2);
+}
+
+body.os-body[data-theme="light"] .taskbar-brand {
+  color: #2b4068;
+}
+
+body.os-body[data-theme="light"] .taskbar-tray {
+  background: rgba(62, 90, 150, 0.08);
+  border: 1px solid rgba(75, 100, 145, 0.2);
+}
+
+body.os-body[data-theme="light"] .tray-item {
+  background: rgba(62, 90, 150, 0.14);
+  color: #22395e;
+}
+
+body.os-body[data-theme="light"] .tray-item:hover,
+body.os-body[data-theme="light"] .tray-item:focus-visible {
+  background: rgba(62, 90, 150, 0.26);
+}
+
+body.os-body[data-theme="light"] .taskbar-clock {
+  color: #3f5580;
+}
+
+body.os-body[data-theme="light"] .theme-toggle {
+  border: 1px solid rgba(75, 100, 145, 0.25);
+  background: rgba(62, 90, 150, 0.12);
+  color: #22395e;
+}
+
+body.os-body[data-theme="light"] .theme-toggle:hover,
+body.os-body[data-theme="light"] .theme-toggle:focus-visible {
+  background: rgba(62, 90, 150, 0.2);
+}
+
+body.os-body[data-theme="light"] .icon-btn::after {
+  color: #1f2a44;
+  background: rgba(245, 249, 255, 0.98);
+  border: 1px solid rgba(75, 100, 145, 0.25);
 }
 
 @media (max-width: 600px) {
