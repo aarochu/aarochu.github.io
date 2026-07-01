@@ -22,6 +22,8 @@ function Get-Mime([string]$ext) {
     ".svg"  { "image/svg+xml" }
     ".ico"  { "image/x-icon" }
     ".webp" { "image/webp" }
+    ".mp4"  { "video/mp4" }
+    ".pdf"  { "application/pdf" }
     default { "application/octet-stream" }
   }
 }

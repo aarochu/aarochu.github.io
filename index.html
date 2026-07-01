@@ -15,58 +15,59 @@
   <div id="desktop" class="desktop-surface" aria-label="Desktop">
     <div class="desk-icons" role="toolbar" aria-label="Desktop shortcuts">
       <button type="button" class="desk-icon" data-window="welcome" aria-label="Welcome — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-house" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">Welcome</span>
+        <span class="desk-icon-art desk-icon-art--welcome" aria-hidden="true"></span>
+        <span class="desk-icon-label">welcome.sh</span>
       </button>
       <button type="button" class="desk-icon" data-window="resume" aria-label="Resume — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-file-pdf" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">Resume</span>
+        <span class="desk-icon-art desk-icon-art--resume" aria-hidden="true"></span>
+        <span class="desk-icon-label">resume.pdf</span>
       </button>
       <button type="button" class="desk-icon" data-window="about" aria-label="About Me — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-user" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">About Me</span>
+        <span class="desk-icon-art desk-icon-art--about" aria-hidden="true"></span>
+        <span class="desk-icon-label">about.txt</span>
       </button>
       <button type="button" class="desk-icon" data-window="projects" aria-label="Projects — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-folder-open" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">Projects</span>
+        <span class="desk-icon-art desk-icon-art--projects" aria-hidden="true"></span>
+        <span class="desk-icon-label">~/projects</span>
       </button>
       <button type="button" class="desk-icon" data-window="basketball" aria-label="Basketball — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-basketball" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">Basketball</span>
+        <span class="desk-icon-art desk-icon-art--basketball" aria-hidden="true"></span>
+        <span class="desk-icon-label">hoops/</span>
       </button>
       <button type="button" class="desk-icon" data-window="contact" aria-label="Contact — double-click to open">
-        <span class="desk-icon-glyph"><i class="fas fa-envelope" aria-hidden="true"></i></span>
-        <span class="desk-icon-label">Contact</span>
+        <span class="desk-icon-art desk-icon-art--contact" aria-hidden="true"></span>
+        <span class="desk-icon-label">contact</span>
       </button>
     </div>
 
     <!-- Windows -->
     <div class="desk-window" id="win-welcome" data-window-id="welcome" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">Welcome</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/welcome.sh</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section hero">
+          <p class="type-prompt">$ ./welcome.sh</p>
           <h1>Hi, I’m Aaron(初荣恩)</h1>
           <p>Engineer. Hooper. Barber.</p>
-          <img src="me.png" alt="Aaron Chu" class="hero-photo" />
+          <img src="me.png" alt="Aaron Chu" class="hero-photo reveal-after-type" />
         </section>
       </div>
     </div>
 
     <div class="desk-window" id="win-about" data-window-id="about" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">About Me</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/about.txt</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section about">
@@ -78,12 +79,12 @@
 
     <div class="desk-window" id="win-projects" data-window-id="projects" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">Projects</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/projects</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section projects">
@@ -120,18 +121,18 @@
 
     <div class="desk-window" id="win-basketball" data-window-id="basketball" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">Basketball</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/hoops</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section basketball">
           <h2>Basketball</h2>
           <p>A few of my basketball highlights</p>
-          <div class="basketball-highlights">
+          <div class="basketball-highlights reveal-after-type">
             <video width="100%" height="315" controls>
               <source src="hoops.mp4" type="video/mp4">
               Your browser does not support the video tag.
@@ -151,22 +152,24 @@
 
     <div class="desk-window" id="win-contact" data-window-id="contact" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">Contact</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/contact</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section contact">
           <h2>Contact</h2>
-          <div class="contact-buttons">
-            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+          <div class="contact-buttons reveal-after-type">
+            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub — github.com/aarochu" title="github.com/aarochu">
               <i class="fab fa-github" aria-hidden="true"></i>
+              <span class="icon-btn-tip">github.com/aarochu</span>
             </a>
-            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn — linkedin.com/in/achu02" title="linkedin.com/in/achu02">
               <i class="fab fa-linkedin" aria-hidden="true"></i>
+              <span class="icon-btn-tip">linkedin.com/in/achu02</span>
             </a>
           </div>
         </section>
@@ -175,26 +178,26 @@
 
     <div class="desk-window" id="win-resume" data-window-id="resume" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
-        <span class="desk-window-title">Resume</span>
-        <div class="desk-window-controls">
-          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"><i class="fas fa-minus" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"><i class="fas fa-window-maximize" aria-hidden="true"></i></button>
-          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
         </div>
+        <span class="desk-window-title">aaron@portfolio: ~/resume.pdf</span>
       </div>
       <div class="desk-window-body">
         <section class="win-section resume">
           <h2>Resume</h2>
           <p>Here is my resume, I am always looking for work :D</p>
           <p><a class="project-link" href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Open/Download PDF</a></p>
-          <iframe src="AaronChu2026.pdf" width="100%" height="calc(100% - 86px)" style="border:1px solid #666;" title="Resume PDF Preview"></iframe>
+          <iframe class="reveal-after-type" src="AaronChu2026.pdf" width="100%" height="calc(100% - 86px)" style="border:1px solid #1a3d22;" title="Resume PDF Preview"></iframe>
         </section>
       </div>
     </div>
   </div>
 
   <footer class="taskbar" role="contentinfo">
-    <div class="taskbar-brand"><i class="fas fa-terminal" aria-hidden="true"></i> Aaron Chu</div>
+    <div class="taskbar-brand"><span class="taskbar-prompt">[aaron@portfolio ~]$</span></div>
     <div id="taskbar-tray" class="taskbar-tray" aria-label="Open windows"></div>
     <div id="taskbar-clock" class="taskbar-clock" aria-live="polite"></div>
   </footer>

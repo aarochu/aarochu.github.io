@@ -5,6 +5,16 @@
 
   const Z_BASE = 50;
   let zCounter = Z_BASE;
+  const typingTokens = new WeakMap();
+
+  const trayLabels = {
+    welcome: "welcome.sh",
+    resume: "resume.pdf",
+    about: "about.txt",
+    projects: "~/projects",
+    basketball: "hoops/",
+    contact: "contact",
+  };
 
   const defaultLayout = {
     welcome: { left: 120, top: 48, width: 400, height: 320 },
@@ -54,7 +64,128 @@
     win.style.top = `${top}px`;
   }
 
-  function openWindow(id) {
+  /* ── Typewriter ── */
+  function isTypeTarget(el) {
+    if (!el.matches("h1, h2, h3, p, .type-prompt")) return false;
+    if (el.closest("iframe, video, .contact-buttons, .project-grid, .basketball-highlights")) {
+      if (!el.closest(".project-card")) return false;
+    }
+    return true;
+  }
+
+  function prepareTypeTargets(win) {
+    win.querySelectorAll(".win-section h1, .win-section h2, .win-section h3, .win-section p, .type-prompt").forEach((el) => {
+      if (!isTypeTarget(el)) return;
+      if (!el.dataset.typeText) {
+        el.dataset.typeText = el.textContent.trim();
+        el.dataset.typeHtml = el.innerHTML;
+      }
+    });
+  }
+
+  function cancelTyping(win) {
+    const token = typingTokens.get(win);
+    if (token) token.cancelled = true;
+    typingTokens.delete(win);
+  }
+
+  function resetWindowText(win) {
+    cancelTyping(win);
+    win.querySelectorAll("[data-type-text]").forEach((el) => {
+      el.textContent = "";
+      el.classList.remove("typing", "typed");
+    });
+    win.querySelectorAll(".reveal-after-type").forEach((el) => {
+      el.classList.remove("is-visible");
+    });
+    delete win.dataset.typed;
+  }
+
+  function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function typeElement(el, token, speed = 16) {
+    return new Promise((resolve) => {
+      const text = el.dataset.typeText || "";
+      const html = el.dataset.typeHtml;
+      el.textContent = "";
+      el.classList.add("typing");
+
+      const cursor = document.createElement("span");
+      cursor.className = "type-cursor";
+      cursor.textContent = "█";
+      el.appendChild(cursor);
+
+      let i = 0;
+      const step = () => {
+        if (token.cancelled) {
+          cursor.remove();
+          resolve();
+          return;
+        }
+        if (i < text.length) {
+          cursor.before(document.createTextNode(text[i]));
+          i += 1;
+          setTimeout(step, speed + Math.random() * 14);
+        } else {
+          cursor.remove();
+          el.classList.remove("typing");
+          el.classList.add("typed");
+          if (html && html !== text) el.innerHTML = html;
+          resolve();
+        }
+      };
+      step();
+    });
+  }
+
+  async function runTypewriter(win) {
+    cancelTyping(win);
+    const token = { cancelled: false };
+    typingTokens.set(win, token);
+
+    prepareTypeTargets(win);
+    win.querySelectorAll(".reveal-after-type").forEach((el) => {
+      el.classList.remove("is-visible");
+    });
+
+    const body = win.querySelector(".desk-window-body");
+    const targets = [...body.querySelectorAll(".type-prompt, h1, h2, h3, p")].filter(isTypeTarget);
+
+    for (const el of targets) {
+      if (token.cancelled) return;
+      const text = el.dataset.typeText || "";
+      let speed = 14;
+      if (el.matches("h1, h2")) speed = 24;
+      else if (el.matches("h3")) speed = 18;
+      else if (text.length > 120) speed = 5;
+      else if (el.matches(".type-prompt")) speed = 28;
+      await typeElement(el, token, speed);
+      await delay(80);
+    }
+
+    if (!token.cancelled) {
+      win.querySelectorAll(".reveal-after-type").forEach((el) => {
+        el.classList.add("is-visible");
+      });
+      win.dataset.typed = "1";
+    }
+    typingTokens.delete(win);
+  }
+
+  function playOpenAnimation(win) {
+    win.classList.remove("opening");
+    void win.offsetWidth;
+    win.classList.add("opening");
+    win.addEventListener(
+      "animationend",
+      () => win.classList.remove("opening"),
+      { once: true }
+    );
+  }
+
+  function openWindow(id, { type = true, animate = true } = {}) {
     const win = document.getElementById(`win-${id}`);
     if (!win) return;
     win.hidden = false;
@@ -62,16 +193,18 @@
     removeTrayItem(id);
     bringToFront(win);
     clampWindowToDesktop(win);
-    win.querySelector(".desk-window-body")?.focus?.({ preventScroll: true });
+    if (animate) playOpenAnimation(win);
+    if (type) runTypewriter(win);
   }
 
   function closeWindow(win) {
     const id = win.dataset.windowId;
     win.hidden = true;
-    win.classList.remove("maximized", "is-dragging", "minimized");
+    win.classList.remove("maximized", "is-dragging", "minimized", "opening");
     removeTrayItem(id);
     clearMaxState(win);
     setMaximizeIcon(win, false);
+    resetWindowText(win);
   }
 
   function clearMaxState(win) {
@@ -85,19 +218,36 @@
     if (win.classList.contains("maximized")) toggleMaximize(win);
     const id = win.dataset.windowId;
     win.classList.add("minimized");
-    win.hidden = true;
     win.classList.remove("is-dragging");
     ensureTrayItem(win, id);
+
+    const onTransitionEnd = (event) => {
+      if (event.target !== win || event.propertyName !== "opacity") return;
+      win.hidden = true;
+      win.removeEventListener("transitionend", onTransitionEnd);
+    };
+
+    win.addEventListener("transitionend", onTransitionEnd);
   }
 
   function restoreFromTray(id) {
     const win = document.querySelector(`.desk-window[data-window-id="${id}"]`);
     if (!win) return;
-    win.classList.remove("minimized");
     win.hidden = false;
+    win.classList.add("minimized");
+    requestAnimationFrame(() => {
+      win.classList.remove("minimized");
+    });
     removeTrayItem(id);
     bringToFront(win);
     clampWindowToDesktop(win);
+    playOpenAnimation(win);
+    if (!win.dataset.typed) runTypewriter(win);
+    else {
+      win.querySelectorAll(".reveal-after-type").forEach((el) => {
+        el.classList.add("is-visible");
+      });
+    }
   }
 
   function ensureTrayItem(win, id) {
@@ -107,7 +257,7 @@
     btn.type = "button";
     btn.className = "tray-item";
     btn.dataset.trayId = id;
-    btn.textContent = win.querySelector(".desk-window-title")?.textContent?.trim() || id;
+    btn.textContent = trayLabels[id] || id;
     btn.addEventListener("click", () => restoreFromTray(id));
     tray.appendChild(btn);
   }
@@ -117,10 +267,7 @@
   }
 
   function setMaximizeIcon(win, maximized) {
-    const icon = win.querySelector(".win-btn-max i");
-    if (!icon) return;
-    icon.classList.remove("fa-window-maximize", "fa-window-restore");
-    icon.classList.add(maximized ? "fa-window-restore" : "fa-window-maximize");
+    win.querySelector(".win-btn-max")?.classList.toggle("is-maximized", maximized);
   }
 
   function toggleMaximize(win) {
@@ -210,6 +357,7 @@
   document.querySelectorAll(".desk-window").forEach((win, index) => {
     const id = win.dataset.windowId;
     applyDefaultGeometry(win, id, index);
+    prepareTypeTargets(win);
 
     win.querySelector(".win-btn-close")?.addEventListener("click", () => closeWindow(win));
     win.querySelector(".win-btn-min")?.addEventListener("click", () => minimizeWindow(win));
@@ -240,4 +388,9 @@
   }
   tickClock();
   setInterval(tickClock, 30_000);
+
+  /* Boot: show Welcome on load */
+  requestAnimationFrame(() => {
+    openWindow("welcome");
+  });
 })();

@@ -1,0 +1,11 @@
+# Local preview server
+_serve-local.ps1
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.cursor/

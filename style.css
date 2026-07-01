@@ -7,9 +7,25 @@ body.os-body {
   margin: 0;
   min-height: 100%;
   height: 100%;
-  color: #f6f9ff;
-  background: #0a0c12;
+  color: #c8f5d0;
+  background: #020403;
   overflow: hidden;
+}
+
+body.os-body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.12) 0px,
+    rgba(0, 0, 0, 0.12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.22;
 }
 
 #bgCanvas {
@@ -17,6 +33,8 @@ body.os-body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background: #020403;
+  opacity: 0.65;
 }
 
 /* Desktop area (above taskbar) */
@@ -65,40 +83,183 @@ body.os-body {
 
 .desk-icon:hover,
 .desk-icon:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 255, 65, 0.08);
   outline: none;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.25);
+  transform: translateY(-2px);
 }
 
 .desk-icon.selected {
-  background: rgba(80, 140, 255, 0.2);
-  box-shadow: 0 0 0 1px rgba(120, 170, 255, 0.35);
+  background: rgba(0, 255, 65, 0.14);
+  box-shadow: 0 0 0 1px rgba(0, 255, 65, 0.45), 0 0 12px rgba(0, 255, 65, 0.15);
 }
 
-.desk-icon-glyph {
+.desk-icon:active .desk-icon-art {
+  transform: scale(0.94);
+}
+
+/* Hand-drawn / retro Linux-style desktop icons */
+.desk-icon-art {
   width: 3.25rem;
   height: 3.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: linear-gradient(160deg, rgba(45, 55, 85, 0.55), rgba(20, 24, 38, 0.85));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  font-size: 1.35rem;
-  color: #e8eeff;
+  display: block;
+  position: relative;
+  image-rendering: pixelated;
+  transition: transform 0.12s ease;
+}
+
+.desk-icon-art--welcome {
+  background:
+    linear-gradient(#0a120a, #0a120a) 6px 22px / 20px 8px no-repeat,
+    linear-gradient(#00ff41, #00ff41) 8px 24px / 2px 6px no-repeat,
+    #0d1a0f;
+  border: 2px solid #1f4d2a;
+  box-shadow: inset 0 0 0 1px #00ff4133;
+}
+
+.desk-icon-art--welcome::before {
+  content: ">_";
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  font-size: 0.72rem;
+  color: #00ff41;
+  letter-spacing: -1px;
+}
+
+.desk-icon-art--resume {
+  background: #e8e2c8;
+  border: 2px solid #8a7f5e;
+  box-shadow: 3px 3px 0 #4a4330;
+}
+
+.desk-icon-art--resume::before {
+  content: "";
+  position: absolute;
+  inset: 8px 10px 10px 8px;
+  border: 1px solid #8a7f5e;
+  background: repeating-linear-gradient(#e8e2c8 0 3px, #cfc7a8 3px 4px);
+}
+
+.desk-icon-art--resume::after {
+  content: "PDF";
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+  font-size: 0.45rem;
+  font-weight: 700;
+  color: #b33;
+  background: #fff;
+  padding: 1px 2px;
+  border: 1px solid #b33;
+}
+
+.desk-icon-art--about {
+  background: #1a2e1f;
+  border: 2px solid #2d6b3a;
+}
+
+.desk-icon-art--about::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f0c090;
+  border: 2px solid #8b5a3c;
+}
+
+.desk-icon-art--about::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  bottom: 6px;
+  width: 26px;
+  height: 14px;
+  background: #3d8f55;
+  border: 2px solid #2d6b3a;
+  border-radius: 4px 4px 0 0;
+}
+
+.desk-icon-art--projects {
+  background: #c9a227;
+  border: 2px solid #7a5f12;
+  border-radius: 2px 2px 4px 4px;
+  clip-path: polygon(0 18%, 42% 18%, 50% 8%, 58% 18%, 100% 18%, 100% 100%, 0 100%);
+}
+
+.desk-icon-art--projects::before {
+  content: "dev";
+  position: absolute;
+  left: 6px;
+  bottom: 5px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #3a2d08;
+}
+
+.desk-icon-art--basketball {
+  background: radial-gradient(circle at 50% 50%, #e87820 0 55%, #b84e10 56% 100%);
+  border: 2px solid #5a2808;
+  border-radius: 50%;
+}
+
+.desk-icon-art--basketball::before,
+.desk-icon-art--basketball::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid #5a280880;
+  border-radius: 50%;
+}
+
+.desk-icon-art--basketball::after {
+  inset: 4px 14px;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+.desk-icon-art--contact {
+  background: #142218;
+  border: 2px solid #2d6b3a;
+}
+
+.desk-icon-art--contact::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 10px;
+  height: 16px;
+  background: #0a140c;
+  border: 2px solid #00ff41;
+}
+
+.desk-icon-art--contact::after {
+  content: "@";
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: #00ff41;
+  font-weight: 700;
 }
 
 .desk-icon-label {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   line-height: 1.2;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  color: #b8f0c4;
+  text-shadow: 0 1px 2px #000, 0 0 8px rgba(0, 255, 65, 0.35);
   word-break: break-word;
 }
 
-/* Draggable windows */
+/* Draggable windows — Linux terminal panels */
 .desk-window {
-  --win-radius: 10px;
+  --win-radius: 6px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -106,16 +267,39 @@ body.os-body {
   min-height: 140px;
   max-width: min(96vw, 920px);
   max-height: min(88vh, 720px);
-  background: linear-gradient(180deg, rgba(12, 14, 22, 0.97), rgba(6, 8, 14, 0.98));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(4, 10, 6, 0.94);
+  border: 1px solid #1f4d2a;
   border-radius: var(--win-radius);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 20px 50px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(0, 255, 65, 0.06),
+    inset 0 0 40px rgba(0, 255, 65, 0.02);
   z-index: 10;
   overflow: hidden;
   resize: both;
+  transition: left 0.2s ease, top 0.2s ease, width 0.2s ease, height 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  transform-origin: center top;
+}
+
+.desk-window.opening {
+  animation: winPop 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes winPop {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.desk-window.minimized {
+  opacity: 0;
+  transform: scale(0.9) translateY(10px);
+  pointer-events: none;
 }
 
 .desk-window[hidden] {
@@ -146,12 +330,11 @@ body.os-body {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  height: 38px;
-  padding: 0 10px 0 14px;
-  background: linear-gradient(180deg, #1a1f2e, #12151f);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 0.65rem;
+  height: 34px;
+  padding: 0 12px 0 10px;
+  background: linear-gradient(180deg, #162218, #0d1510);
+  border-bottom: 1px solid #1f4d2a;
   cursor: grab;
   user-select: none;
 }
@@ -161,10 +344,11 @@ body.os-body {
 }
 
 .desk-window-title {
-  font-size: 0.82rem;
+  flex: 1 1 auto;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #dce4ff;
+  letter-spacing: 0.02em;
+  color: #6ddf88;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -173,33 +357,45 @@ body.os-body {
 .desk-window-controls {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
+.desk-window-controls--linux {
+  order: -1;
+}
+
 .win-btn {
-  width: 28px;
-  height: 22px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #c8d2f0;
-  font-size: 0.65rem;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 50%;
   cursor: pointer;
-  transition: background 0.1s, color 0.1s;
+  transition: filter 0.1s, transform 0.1s;
 }
 
 .win-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  filter: brightness(1.15);
+  transform: scale(1.08);
 }
 
-.win-btn-close:hover {
-  background: #c42b2b;
-  color: #fff;
+.win-btn-close {
+  background: #e95454;
+}
+
+.win-btn-min {
+  background: #e8b339;
+}
+
+.win-btn-max {
+  background: #3ecf5a;
+}
+
+.win-btn-max.is-maximized {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  background: #2aa844;
 }
 
 .desk-window-body {
@@ -207,6 +403,55 @@ body.os-body {
   overflow: auto;
   padding: 1rem 1.1rem 1.25rem;
   min-height: 0;
+  background: rgba(2, 8, 4, 0.55);
+}
+
+.win-section h1,
+.win-section h2,
+.win-section h3,
+.win-section p,
+.type-prompt {
+  color: #b8f5c8;
+}
+
+.win-section h2::before {
+  content: "> ";
+  color: #00ff41;
+  opacity: 0.95;
+}
+
+.type-prompt {
+  margin: 0 0 0.65rem;
+  font-size: 0.82rem;
+  color: #00ff41;
+  opacity: 0.9;
+}
+
+.type-cursor {
+  display: inline-block;
+  color: #00ff41;
+  animation: blinkCursor 0.9s step-end infinite;
+  margin-left: 1px;
+}
+
+@keyframes blinkCursor {
+  50% { opacity: 0; }
+}
+
+.reveal-after-type {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.reveal-after-type.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card a,
+.project-link {
+  color: #5ee87a;
 }
 
 /* Window content — terminal-inspired panel */
@@ -333,26 +578,67 @@ body.os-body {
 }
 
 .icon-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
   font-size: 1.25rem;
-  color: #f6f9ff;
+  color: #b8f5c8;
   text-decoration: none;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
-  transition: background 0.12s, color 0.12s;
+  border: 1px solid #1f4d2a;
+  background: rgba(0, 255, 65, 0.06);
+  transition: background 0.12s, color 0.12s, border-color 0.12s, box-shadow 0.12s;
 }
 
-.icon-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: rgba(0, 255, 65, 0.14);
+  color: #00ff41;
+  border-color: #00ff4155;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.2);
+  outline: none;
 }
 
-/* Taskbar */
+.icon-btn-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(4px);
+  padding: 4px 8px;
+  font-size: 0.62rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #b8f5c8;
+  background: rgba(4, 12, 6, 0.96);
+  border: 1px solid #1f4d2a;
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+
+.icon-btn-tip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #1f4d2a;
+}
+
+.icon-btn:hover .icon-btn-tip,
+.icon-btn:focus-visible .icon-btn-tip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Taskbar — Linux shell bar */
 .taskbar {
   --taskbar-h: 48px;
   position: fixed;
@@ -365,26 +651,31 @@ body.os-body {
   align-items: center;
   gap: 0.75rem;
   padding: 0 12px;
-  background: linear-gradient(180deg, #1c2233 0%, #12161f 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, #0f1812 0%, #080f0b 100%);
+  border-top: 1px solid #00ff4144;
+  box-shadow: 0 -4px 24px rgba(0, 255, 65, 0.08);
 }
 
 .taskbar-brand {
   flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #b8c4e8;
   padding: 0 0.5rem;
 }
 
+.taskbar-prompt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #00ff41;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.35);
+  animation: promptGlow 3s ease-in-out infinite;
+}
+
+@keyframes promptGlow {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; text-shadow: 0 0 14px rgba(0, 255, 65, 0.55); }
+}
+
 .taskbar-brand i {
-  color: #7ab87a;
-  font-size: 0.9rem;
+  display: none;
 }
 
 .taskbar-tray {
@@ -406,29 +697,30 @@ body.os-body {
   flex: 0 0 auto;
   max-width: 140px;
   padding: 6px 10px;
-  border: none;
+  border: 1px solid #1f4d2a;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #e8eeff;
+  background: rgba(0, 255, 65, 0.08);
+  color: #b8f5c8;
   font: inherit;
   font-size: 0.72rem;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background 0.1s;
+  transition: background 0.1s, box-shadow 0.1s;
 }
 
 .tray-item:hover,
 .tray-item:focus-visible {
-  background: rgba(100, 140, 220, 0.35);
+  background: rgba(0, 255, 65, 0.18);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
   outline: none;
 }
 
 .taskbar-clock {
   flex: 0 0 auto;
   font-size: 0.72rem;
-  color: #9aa6c4;
+  color: #5ee87a;
   padding: 0 0.35rem;
   min-width: 3.5rem;
   text-align: right;
@@ -449,10 +741,9 @@ body.os-body {
     width: 4.6rem;
   }
 
-  .desk-icon-glyph {
+  .desk-icon-art {
     width: 2.75rem;
     height: 2.75rem;
-    font-size: 1.1rem;
   }
 
   .desk-window {
