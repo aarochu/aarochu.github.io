@@ -678,11 +678,11 @@ body.os-body::after {
   display: none;
 }
 
-.taskbar-tray {
+.taskbar-dock {
   flex: 1 1 auto;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   min-height: 36px;
   padding: 4px 8px;
@@ -693,9 +693,9 @@ body.os-body::after {
   overflow-x: auto;
 }
 
-.tray-item {
+.dock-item {
   flex: 0 0 auto;
-  max-width: 140px;
+  max-width: 150px;
   padding: 6px 10px;
   border: 1px solid #1f4d2a;
   border-radius: 4px;
@@ -707,14 +707,31 @@ body.os-body::after {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: background 0.1s, box-shadow 0.1s;
+  transition: background 0.1s, box-shadow 0.1s, border-color 0.1s, opacity 0.1s;
 }
 
-.tray-item:hover,
-.tray-item:focus-visible {
+.dock-item:hover,
+.dock-item:focus-visible {
   background: rgba(0, 255, 65, 0.18);
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
   outline: none;
+}
+
+.dock-item.is-active {
+  background: rgba(0, 255, 65, 0.22);
+  border-color: #00ff4166;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.25);
+  color: #e8ffe8;
+}
+
+.dock-item.is-minimized,
+.dock-item.is-closed {
+  opacity: 0.55;
+  border-style: dashed;
+}
+
+.dock-item.is-pinned {
+  border-left: 2px solid #00ff41;
 }
 
 .taskbar-clock {
@@ -724,6 +741,80 @@ body.os-body::after {
   padding: 0 0.35rem;
   min-width: 3.5rem;
   text-align: right;
+}
+
+/* Shell terminal (inside desk window) */
+.desk-window--terminal {
+  min-width: 300px;
+  min-height: 180px;
+}
+
+.desk-window-body--terminal {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.shell-terminal-output {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #b8f5c8;
+  min-height: 0;
+}
+
+.shell-terminal-output .term-line {
+  margin: 0 0 0.35rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.shell-terminal-output .term-line--muted {
+  color: #5a8a62;
+}
+
+.shell-terminal-output .term-line--cmd {
+  color: #00ff41;
+}
+
+.shell-terminal-output .term-line--err {
+  color: #ff6b6b;
+}
+
+.shell-terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.65rem;
+  border-top: 1px solid #1f4d2a;
+  background: rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.shell-prompt {
+  color: #00ff41;
+  font-size: 0.78rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.shell-terminal-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: #e8ffe8;
+  font: inherit;
+  font-size: 0.75rem;
+  outline: none;
+  caret-color: #00ff41;
+}
+
+.shell-terminal-input::placeholder {
+  color: #4a7a52;
 }
 
 @media (max-width: 600px) {

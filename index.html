@@ -40,6 +40,32 @@
       </button>
     </div>
 
+    <div class="desk-window desk-window--terminal" id="win-terminal" data-window-id="terminal" data-pinned-dock="true" hidden>
+      <div class="desk-window-titlebar" data-drag-handle>
+        <div class="desk-window-controls desk-window-controls--linux">
+          <button type="button" class="win-btn win-btn-close" title="Close" aria-label="Close"></button>
+          <button type="button" class="win-btn win-btn-min" title="Minimize to taskbar" aria-label="Minimize"></button>
+          <button type="button" class="win-btn win-btn-max" title="Maximize" aria-label="Maximize"></button>
+        </div>
+        <span class="desk-window-title">aaron@portfolio: ~</span>
+      </div>
+      <div class="desk-window-body desk-window-body--terminal">
+        <div id="terminal-output" class="shell-terminal-output" role="log" aria-live="polite"></div>
+        <form id="terminal-form" class="shell-terminal-input-row" autocomplete="off">
+          <label for="terminal-input" class="shell-prompt">$</label>
+          <input
+            id="terminal-input"
+            class="shell-terminal-input"
+            type="text"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-label="Terminal command input"
+          />
+        </form>
+      </div>
+    </div>
+
     <!-- Windows -->
     <div class="desk-window" id="win-welcome" data-window-id="welcome" hidden>
       <div class="desk-window-titlebar" data-drag-handle>
@@ -198,7 +224,7 @@
 
   <footer class="taskbar" role="contentinfo">
     <div class="taskbar-brand"><span class="taskbar-prompt">[aaron@portfolio ~]$</span></div>
-    <div id="taskbar-tray" class="taskbar-tray" aria-label="Open windows"></div>
+    <div id="taskbar-dock" class="taskbar-dock" aria-label="Open windows"></div>
     <div id="taskbar-clock" class="taskbar-clock" aria-live="polite"></div>
   </footer>
 
