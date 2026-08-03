@@ -4,12 +4,200 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aaron Chu – Portfolio</title>
+  <link rel="stylesheet" href="site.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@500;600;700&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    (function () {
+      var saved = localStorage.getItem("aaron-view");
+      if (saved === "terminal") document.documentElement.classList.add("boot-terminal");
+    })();
+  </script>
 </head>
-<body class="os-body">
+<body class="site-body">
+  <button type="button" id="view-toggle" class="view-toggle" aria-label="Switch view">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="view-toggle-label">Terminal View</span>
+  </button>
+
+  <div id="site-view">
+    <nav class="site-nav">
+      <a class="site-nav-brand" href="#top">aaron<span>.chu</span></a>
+      <ul class="site-nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#basketball">Basketball</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+      </ul>
+    </nav>
+
+    <header class="site-hero" id="top">
+      <div class="wrap site-hero-grid">
+        <div>
+          <p class="site-eyebrow">Rutgers · Computer Engineering</p>
+          <h1>Hi, I'm Aaron<br /><em>(初荣恩).</em></h1>
+          <p class="site-hero-lede">I build things — some of them run on a server, some of them run on a basketball court, one of them runs on a pair of clippers. Based between the Bay Area and New Brunswick, NJ.</p>
+          <div class="site-cta-row">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
+          </div>
+          <p class="hero-meta">
+            <span><strong>CE</strong> @ Rutgers</span>
+            <span class="sep">/</span>
+            <span>self-taught barber since <strong>2023</strong></span>
+            <span class="sep">/</span>
+            <span>Hooper</span>
+          </p>
+        </div>
+        <div class="site-hero-photo-wrap">
+          <img src="me.png" alt="Aaron Chu" />
+          <span class="site-hero-tag">Bay Area → Rutgers</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="site-section" id="about">
+      <div class="wrap">
+        <div class="section-kicker"><h2>About</h2></div>
+        <div class="about-grid">
+          <p class="site-section-lede">I'm from the Bay Area, studying Computer Engineering with a minor in Computer Science at Rutgers. I like building projects that help others out, not just ones that run on my machine. Outside of school I love to play basketball — I've played all my life on high school teams, intramural teams, and the Rutgers club team for a year — and picked up barbering as a self-taught skill in 2023, building a steady client base ever since.</p>
+          <div class="about-tags">
+            <span class="tag-line">Full Stack Development</span>
+            <span class="tag-line">Embedded Systems</span>
+            <span class="tag-line">Machine Learning</span>
+            <span class="tag-line">Physical AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="experience">
+      <div class="wrap">
+        <div class="section-kicker"><h2>Experience</h2></div>
+        <ul class="exp-list">
+          <li class="exp-entry">
+            <span class="exp-role">Software Engineering Intern <span class="exp-at">@ Magnefy</span></span>
+            <span class="exp-dates">June 2026 – Aug. 2026</span>
+          </li>
+          <li class="exp-entry">
+            <span class="exp-role">Intern <span class="exp-at">@ Trainify Labs Inc</span></span>
+            <span class="exp-dates">Apr 2026 – Jun 2026</span>
+          </li>
+          <li class="exp-entry">
+            <span class="exp-role">Undergraduate Research Assistant <span class="exp-at">@ Rutgers Electrical and Computer Engineering</span></span>
+            <span class="exp-dates">Dec 2025 – Present</span>
+          </li>
+          <li class="exp-entry">
+            <span class="exp-role">Deputy Lead Systems Integration Engineer <span class="exp-at">@ University Nanosatellite Program</span></span>
+            <span class="exp-dates">Sept. 2025 – Present</span>
+          </li>
+          <li class="exp-entry">
+            <span class="exp-role">Drone Support Intern <span class="exp-at">@ Integem</span></span>
+            <span class="exp-dates">June 2025 – Aug. 2025</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="site-section" id="projects">
+      <div class="wrap">
+        <div class="section-kicker"><h2>Projects</h2></div>
+
+        <div class="case-list">
+          <div class="case-row">
+            <div>
+              <h3>VeriStudent</h3>
+              <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat.</p>
+            </div>
+            <a class="case-link" href="https://veristudent.vercel.app/login" target="_blank" rel="noopener noreferrer">View live ↗</a>
+          </div>
+          <div class="case-row">
+            <div>
+              <h3>DeskPartner</h3>
+              <p>An overhead camera and VLM planner drive a reBot B601-DM arm to autonomously sort a desk zone into trash, pen cup, and tray, running closed-loop until the desk is clean. Won Honorable Mention at the Embodied Metal Hackathon, hosted by Mission Robotics, New Theory, Savant, and North Star.</p>
+            </div>
+            <a class="case-link" href="https://github.com/aarochu/DeskPartner" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+          </div>
+          <div class="case-row">
+            <div>
+              <h3>PocketLab</h3>
+              <p>Built with a team of 4, PocketLab turns a $10 ESP32 into a real-time IoT science lab: a React/TypeScript web app streams live sensor data over WebSockets into Recharts and Three.js visualizations. Includes guided, step-by-step experiment templates with noise filtering, offline fallback, and data export.</p>
+            </div>
+            <div class="case-links">
+              <a class="case-link" href="https://github.com/ja-zoe/pocket-lab" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+              <a class="case-link" href="https://devpost.com/software/pocketlab-gvbmwd" target="_blank" rel="noopener noreferrer">DevPost ↗</a>
+            </div>
+          </div>
+          <div class="case-row">
+            <div>
+              <h3>Run Club Website</h3>
+              <p>Responsive club site with Supabase auth and real-time data, Resend for automated email notifications, Tailwind for styling.</p>
+            </div>
+            <a class="case-link" href="https://2fasttclub.github.io" target="_blank" rel="noopener noreferrer">View live ↗</a>
+          </div>
+          <div class="case-row">
+            <div>
+              <h3>Zipply</h3>
+              <p>Real-time chat app built on React and Firebase — auth, instant messaging, responsive across devices.</p>
+            </div>
+            <div class="case-links">
+              <a class="case-link" href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Watch demo ↗</a>
+              <a class="case-link" href="https://github.com/aarochu/Zipply" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+            </div>
+          </div>
+          <div class="case-row">
+            <div>
+              <h3>SuperHearo</h3>
+              <p>Team of 4, Android app pairing voice control and speech recognition to help elderly and blind users with daily tasks.</p>
+            </div>
+            <a class="case-link" href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="basketball">
+      <div class="wrap">
+        <div class="section-kicker"><h2>Basketball</h2></div>
+        <p class="site-section-lede">A few highlights from the court.</p>
+        <div class="reel-grid">
+          <video controls>
+            <source src="hoops.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video controls>
+            <source src="hoops2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video controls>
+            <source src="hoops3.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section" id="contact">
+      <div class="wrap">
+        <div class="section-kicker"><h2>Contact</h2></div>
+        <div class="contact-block">
+          <a class="contact-email" href="mailto:aaronchu022@gmail.com">aaronchu022@gmail.com</a>
+          <div class="contact-icon-row">
+            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="github.com/aarochu"><i class="fab fa-github" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="linkedin.com/in/achu02"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">Aaron Chu — built with plain HTML, CSS, and JS.</footer>
+  </div>
+
+  <div id="terminal-view" class="os-body" hidden>
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
   <div id="desktop" class="desktop-surface" aria-label="Desktop">
@@ -118,7 +306,18 @@
           <div class="project-grid">
             <div class="project-card">
               <h3>VeriStudent</h3>
-              <p>Full stack marketplace style app for college students that makes it easy to safely buy and sell textbooks and find sublets. Students sign in with Google using a dot edu email, complete a simple profile, and post listings with images, prices, and pickup or sublet details. The frontend is built with React and Expo and deployed to Vercel, with a Supabase Postgres backend handling users, listings, messages, image storage, and real time chat between buyers and sellers.</p>
+              <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat.</p>
+              <p><a href="https://veristudent.vercel.app/login" target="_blank" rel="noopener noreferrer">View Live</a></p>
+            </div>
+            <div class="project-card">
+              <h3>DeskPartner</h3>
+              <p>An overhead camera and VLM planner drive a reBot B601-DM arm to autonomously sort a desk zone into trash, pen cup, and tray, running closed-loop until the desk is clean. Won Honorable Mention at the Embodied Metal Hackathon, hosted by Mission Robotics, New Theory, Savant, and North Star.</p>
+              <p><a href="https://github.com/aarochu/DeskPartner" target="_blank" rel="noopener noreferrer">Repository</a></p>
+            </div>
+            <div class="project-card">
+              <h3>PocketLab</h3>
+              <p>Built with a team of 4, PocketLab turns a $10 ESP32 into a real-time IoT science lab: a React/TypeScript web app streams live sensor data over WebSockets into Recharts and Three.js visualizations. Includes guided, step-by-step experiment templates with noise filtering, offline fallback, and data export.</p>
+              <p><a href="https://github.com/ja-zoe/pocket-lab" target="_blank" rel="noopener noreferrer">Repository</a> · <a href="https://devpost.com/software/pocketlab-gvbmwd" target="_blank" rel="noopener noreferrer">DevPost</a></p>
             </div>
             <div class="project-card">
               <h3>Run Club Website</h3>
@@ -126,19 +325,14 @@
               <p><a href="https://2fasttclub.github.io" target="_blank" rel="noopener noreferrer">View Live</a></p>
             </div>
             <div class="project-card">
-              <h3>React Planner</h3>
-              <p>A day-based task scheduler built with React and Vite. Features hourly time slots (8:00–24:00), add/edit/delete tasks, persistent storage via LocalStorage, and optional custom CSS injection for advanced styling.</p>
-              <p><a href="https://aarochu.github.io/React-Planner/" target="_blank" rel="noopener noreferrer">View Live</a></p>
-            </div>
-            <div class="project-card">
               <h3>Zipply</h3>
               <p>A real-time chat application built with React and Firebase. Supports user authentication, instant messaging, and responsive design across devices.</p>
-              <a href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Video Demo</a>
+              <p><a href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Video Demo</a> · <a href="https://github.com/aarochu/Zipply" target="_blank" rel="noopener noreferrer">Repository</a></p>
             </div>
             <div class="project-card">
               <h3>SuperHearo</h3>
               <p>In a team of 4, created an Android app called “SuperHearo”: a voice-controlled AI targeted for the elderly &amp; the blind. The app uses speech recognition and AI to assist users with daily tasks, improving accessibility and independence.</p>
-              <p><a href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Source code</a></p>
+              <p><a href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Repository</a></p>
             </div>
           </div>
         </section>
@@ -211,12 +405,12 @@
         </div>
         <span class="desk-window-title">aaron@portfolio: ~/resume.pdf</span>
       </div>
-      <div class="desk-window-body">
+      <div class="desk-window-body desk-window-body--resume">
         <section class="win-section resume">
           <h2>Resume</h2>
           <p>Here is my resume, I am always looking for work :D</p>
           <p><a class="project-link" href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Open/Download PDF</a></p>
-          <iframe class="reveal-after-type" src="AaronChu2026.pdf" width="100%" height="calc(100% - 86px)" style="border:1px solid #1a3d22;" title="Resume PDF Preview"></iframe>
+          <iframe class="reveal-after-type resume-frame" src="AaronChu2026.pdf" title="Resume PDF Preview"></iframe>
         </section>
       </div>
     </div>
@@ -227,8 +421,11 @@
     <div id="taskbar-dock" class="taskbar-dock" aria-label="Open windows"></div>
     <div id="taskbar-clock" class="taskbar-clock" aria-live="polite"></div>
   </footer>
+  </div>
 
   <script src="background.js"></script>
   <script src="desktop.js"></script>
+  <script src="view-toggle.js"></script>
+  <script src="site-reveal.js"></script>
 </body>
 </html>

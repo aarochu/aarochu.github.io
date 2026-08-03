@@ -41,15 +41,19 @@ while ($listener.IsListening) {
       $bytes = [System.IO.File]::ReadAllBytes($file)
       $res.ContentType = Get-Mime ([System.IO.Path]::GetExtension($file))
       $res.ContentLength64 = $bytes.LongLength
-      $res.OutputStream.Write($bytes, 0, $bytes.Length)
+      try { $res.OutputStream.Write($bytes, 0, $bytes.Length) } catch { }
     } elseif ([System.IO.Directory]::Exists($file)) {
       $idx = [System.IO.Path]::Combine($file, "index.html")
       if ([System.IO.File]::Exists($idx)) {
         $bytes = [System.IO.File]::ReadAllBytes($idx)
         $res.ContentType = "text/html; charset=utf-8"
         $res.ContentLength64 = $bytes.LongLength
-        $res.OutputStream.Write($bytes, 0, $bytes.Length)
+        try { $res.OutputStream.Write($bytes, 0, $bytes.Length) } catch { }
       } else { $res.StatusCode = 404 }
     } else { $res.StatusCode = 404 }
-  } finally { $res.Close() }
+  } catch {
+    Write-Host "Request error: $($_.Exception.Message)"
+  } finally {
+    try { $res.Close() } catch { }
+  }
 }
