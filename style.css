@@ -52,7 +52,7 @@ html {
   overflow: hidden;
 }
 
-/* Desktop icons — column like classic OS with safe wrapping */
+/* Desktop icons: column like classic OS with safe wrapping */
 .desk-icons {
   position: absolute;
   top: 1rem;
@@ -261,7 +261,7 @@ html {
   word-break: break-word;
 }
 
-/* Draggable windows — Linux terminal panels */
+/* Draggable windows: Linux terminal panels */
 .desk-window {
   --win-radius: 6px;
   position: absolute;
@@ -466,7 +466,7 @@ html {
   color: #5ee87a;
 }
 
-/* Window content — terminal-inspired panel */
+/* Window content: terminal-inspired panel */
 .win-section {
   margin: 0;
   padding: 0;
@@ -654,7 +654,7 @@ html {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Taskbar — Linux shell bar */
+/* Taskbar: Linux shell bar */
 .taskbar {
   --taskbar-h: 48px;
   position: fixed;

@@ -1,5 +1,5 @@
 /* ============================================================
-   Aaron Chu — default portfolio view (light / editorial)
+   Aaron Chu, default portfolio view (light / editorial)
    Terminal view lives in style.css and is toggled separately.
    ============================================================ */
 
@@ -330,7 +330,7 @@ body.view-terminal .view-toggle .dot {
 }
 
 .tag-line::before {
-  content: "—";
+  content: "•";
   color: var(--accent-2-dark);
   margin-right: 0.5rem;
 }

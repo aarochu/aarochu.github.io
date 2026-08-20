@@ -582,7 +582,7 @@
         return;
       }
       if (cmd === "whoami") {
-        print("Aaron Chu (初荣恩) — Engineer. Hooper. Barber.");
+        print("Aaron Chu (初荣恩): Engineer. Hooper. Barber.");
         return;
       }
       if (cmd === "date") {
@@ -652,7 +652,7 @@
     }
 
     printBlock([
-      "Portfolio OS v1.0 — Aaron Chu",
+      "Portfolio OS v1.0, Aaron Chu",
       "Type 'help' for commands, or 'ls' to list apps.",
     ], "muted");
     runLs();
