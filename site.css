@@ -576,3 +576,68 @@ body.view-terminal .view-toggle .dot {
     align-items: flex-start;
   }
 }
+
+/* ── DeskPartner interactive demo widget ── */
+:root {
+  --dp-font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --dp-font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --dp-color-text-primary: #1b1b1f;
+  --dp-color-text-secondary: #52525b;
+  --dp-color-text-tertiary: #8b8d98;
+  --dp-color-text-quaternary: #b9bbc3;
+  --dp-color-surface: var(--paper-strong, #ffffff);
+  --dp-color-surface-muted: var(--paper, #f4f4f5);
+  --dp-color-surface-raised: var(--paper-strong, #ffffff);
+  --dp-color-border: var(--line, #e4e4e7);
+  --dp-color-accent: #2f6fed;
+  --dp-color-danger: #e5484d;
+  --dp-color-positive: #30a46c;
+  --dp-color-warning: #f5a524;
+  --dp-chart-1: #2f6fed;
+  --dp-chart-2: #e5484d;
+  --dp-chart-3: #30a46c;
+  --dp-chart-4: #8e4ec6;
+  --dp-chart-5: #8b8d98;
+}
+
+.dp-demo-card {
+  max-width: 760px;
+  margin: 1.25rem 0 0;
+  border: 1px solid var(--dp-color-border);
+  border-radius: 12px;
+  padding: 20px;
+  background: var(--dp-color-surface);
+  font-family: var(--dp-font-sans, sans-serif);
+}
+
+.arm-btn {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--dp-color-border);
+  background: transparent;
+  color: var(--dp-color-text-primary);
+  cursor: pointer;
+  transition: opacity 120ms;
+}
+
+.arm-btn.primary {
+  background: var(--dp-color-text-primary);
+  color: var(--dp-color-surface);
+  border-color: transparent;
+}
+
+.arm-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.arm-btn:not(:disabled):hover {
+  opacity: 0.82;
+}
+
+.can:focus-visible {
+  outline: 2px solid var(--dp-color-accent);
+  outline-offset: 4px;
+}

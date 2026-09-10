@@ -137,6 +137,192 @@
             </div>
             <a class="case-link" href="https://github.com/aarochu/DeskPartner" target="_blank" rel="noopener noreferrer">Repository ↗</a>
           </div>
+
+          <div class="dp-demo-card">
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+              <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">DeskPartner Demo</span>
+              <span id="st" style="font-size:14px;color:var(--dp-color-text-secondary);">ready, click a can or run the demo</span>
+            </div>
+            <svg id="scene" viewBox="0 0 680 400" style="width:100%;display:block;">
+              <line x1="16" y1="350" x2="664" y2="350" stroke="var(--dp-color-border)" stroke-width="2"/>
+              <line x1="40" y1="350" x2="40" y2="386" stroke="var(--dp-color-border)" stroke-width="3"/>
+              <line x1="640" y1="350" x2="640" y2="386" stroke="var(--dp-color-border)" stroke-width="3"/>
+              <line x1="140" y1="336" x2="224" y2="336" stroke="var(--dp-color-border)" stroke-width="2"/>
+              <rect x="74" y="288" width="54" height="62" rx="8" fill="var(--dp-color-surface-muted)" stroke="var(--dp-color-border)"/>
+              <line id="ua" x1="101" y1="268" x2="133" y2="132" stroke="var(--dp-color-text-primary)" stroke-width="11" stroke-linecap="round"/>
+              <line id="fa" x1="133" y1="132" x2="262" y2="150" stroke="var(--dp-color-text-primary)" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="101" cy="286" r="14" fill="var(--dp-color-surface)" stroke="var(--dp-color-text-primary)" stroke-width="3"/>
+              <circle id="ej" cx="133" cy="132" r="7.5" fill="var(--dp-color-surface)" stroke="var(--dp-color-text-primary)" stroke-width="3"/>
+              <g class="can" data-i="0" tabindex="0" role="button" aria-label="Grab berry can" style="--cc:var(--dp-chart-1); cursor:pointer;">
+                <title>grab berry</title>
+                <rect x="-13" y="-24" width="26" height="48" rx="5" fill="color-mix(in srgb,var(--cc) 88%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="13" ry="3.8" fill="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="7" ry="2" fill="none" stroke="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))" stroke-width="1.4"/>
+                <text transform="rotate(-90)" y="3.5" text-anchor="middle" font-size="10" font-weight="500" letter-spacing="1.5" fill="var(--dp-color-surface)">berry</text>
+              </g>
+              <g class="can" data-i="1" tabindex="0" role="button" aria-label="Grab cola can" style="--cc:var(--dp-chart-2); cursor:pointer;">
+                <title>grab cola</title>
+                <rect x="-13" y="-24" width="26" height="48" rx="5" fill="color-mix(in srgb,var(--cc) 88%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="13" ry="3.8" fill="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="7" ry="2" fill="none" stroke="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))" stroke-width="1.4"/>
+                <text transform="rotate(-90)" y="3.5" text-anchor="middle" font-size="10" font-weight="500" letter-spacing="1.5" fill="var(--dp-color-surface)">cola</text>
+              </g>
+              <g class="can" data-i="2" tabindex="0" role="button" aria-label="Grab grape can" style="--cc:var(--dp-chart-4); cursor:pointer;">
+                <title>grab grape</title>
+                <rect x="-13" y="-24" width="26" height="48" rx="5" fill="color-mix(in srgb,var(--cc) 88%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="13" ry="3.8" fill="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))"/>
+                <ellipse cx="0" cy="-24" rx="7" ry="2" fill="none" stroke="color-mix(in srgb,var(--cc) 45%,var(--dp-color-surface))" stroke-width="1.4"/>
+                <text transform="rotate(-90)" y="3.5" text-anchor="middle" font-size="10" font-weight="500" letter-spacing="1.5" fill="var(--dp-color-surface)">grape</text>
+              </g>
+              <g id="hand">
+                <rect x="-9" y="-6.5" width="18" height="13" rx="4" fill="var(--dp-color-text-primary)"/>
+                <line id="fg1" x1="7" y1="0" x2="22" y2="-12" stroke="var(--dp-color-text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+                <line id="fg2" x1="7" y1="0" x2="22" y2="12" stroke="var(--dp-color-text-primary)" stroke-width="3.5" stroke-linecap="round"/>
+              </g>
+              <rect x="140" y="338" width="84" height="12" rx="3" fill="var(--dp-color-surface-muted)" stroke="var(--dp-color-border)"/>
+              <line x1="140" y1="336" x2="140" y2="342" stroke="var(--dp-color-border)" stroke-width="2"/>
+              <line x1="224" y1="336" x2="224" y2="342" stroke="var(--dp-color-border)" stroke-width="2"/>
+            </svg>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;">
+              <button id="demo" class="arm-btn primary">Run demo</button>
+              <button id="reset" class="arm-btn">Reset</button>
+              <span id="cnt" style="font-size:14px;color:var(--dp-color-text-secondary);margin-left:auto;">packed 0 / 3</span>
+            </div>
+            <div id="tel" style="font-family:var(--dp-font-mono,monospace);font-size:12px;color:var(--dp-color-text-tertiary);margin-top:8px;">shoulder −76.6° · elbow 96.6° · gripper open · idle</div>
+          </div>
+          <script>
+          (function(){
+          var S={x:101,y:268},L1=140,L2=130,HOME={tx:262,ty:150};
+          var CANS=[{x:246,name:'berry'},{x:306,name:'cola'},{x:362,name:'grape'}];
+          var SLOTS=[156,182,208],PLACED_Y=326;
+          var pose={tx:HOME.tx,ty:HOME.ty,grip:1};
+          var cans=CANS.map(function(c,i){return{i:i,x:c.x,y:PLACED_Y,mode:'idle',sx:0,sy:0,st:0};});
+          var seq=null,phaseIdx=0,phaseStart=0,running=false,lastPhaseName='idle';
+          var svg=document.getElementById('scene');
+          var ua=document.getElementById('ua'),fa=document.getElementById('fa'),ej=document.getElementById('ej'),hand=document.getElementById('hand');
+          var fg1=document.getElementById('fg1'),fg2=document.getElementById('fg2');
+          var canEls=[].slice.call(svg.querySelectorAll('.can'));
+          var st=document.getElementById('st'),tel=document.getElementById('tel'),cnt=document.getElementById('cnt');
+          var demoBtn=document.getElementById('demo'),resetBtn=document.getElementById('reset');
+          function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+          function ik(t){
+            var dx=t.tx-S.x,dy=t.ty-S.y;
+            var d=clamp(Math.hypot(dx,dy),60,L1+L2-2);
+            var a=Math.atan2(dy,dx);
+            var g=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1));
+            var dl=Math.acos(clamp((L2*L2+d*d-L1*L1)/(2*L2*d),-1,1));
+            var u=a-g,f=a+dl;
+            var E={x:S.x+L1*Math.cos(u),y:S.y+L1*Math.sin(u)};
+            var W={x:E.x+L2*Math.cos(f),y:E.y+L2*Math.sin(f)};
+            return{E:E,W:W,u:u,f:f};
+          }
+          function ease(t){return t*t*(3-2*t);}
+          function setStatus(s){st.textContent=s;}
+          function updateCnt(){cnt.textContent='packed '+cans.filter(function(c){return c.mode==='placed';}).length+' / 3';}
+          function grabPhases(ci){
+            var c=CANS[ci],slot=SLOTS[ci];
+            return[
+              {to:{tx:c.x,ty:238,grip:1},dur:650,name:'reaching '+c.name},
+              {to:{tx:c.x,ty:300,grip:1},dur:550,name:'lowering'},
+              {to:{tx:c.x,ty:300,grip:0.08},dur:380,name:'gripping',kind:'close',can:ci},
+              {to:{tx:c.x,ty:236,grip:0.08},dur:520,name:'lifting'},
+              {to:{tx:slot,ty:298,grip:0.08},dur:750,name:'shuttling to crate'},
+              {to:{tx:slot,ty:298,grip:1},dur:340,name:'releasing',kind:'release',can:ci},
+              {to:{tx:HOME.tx,ty:HOME.ty,grip:1},dur:750,name:'returning'}
+            ];
+          }
+          function startSeq(phases,done){
+            seq={list:phases,done:done};phaseIdx=0;
+            phases[0].from={tx:pose.tx,ty:pose.ty,grip:pose.grip};
+            phaseStart=performance.now();running=true;demoBtn.disabled=true;
+            lastPhaseName=phases[0].name;setStatus(phases[0].name+'…');
+          }
+          function advance(now){
+            var ph=seq.list[phaseIdx];
+            if(ph.kind==='close'){cans[ph.can].mode='carried';}
+            if(ph.kind==='release'){
+              var c=cans[ph.can];
+              c.mode='settle';c.sx=c.x;c.sy=c.y;c.st=now;
+              c.tx=SLOTS[ph.can];c.ty=PLACED_Y;
+            }
+            phaseIdx++;
+            if(phaseIdx>=seq.list.length){
+              var d=seq.done;seq=null;running=false;demoBtn.disabled=false;
+              lastPhaseName='idle';
+              if(d){d();}else{setStatus('ready, click a can or run the demo');}
+              return;
+            }
+            var nx=seq.list[phaseIdx];
+            nx.from={tx:pose.tx,ty:pose.ty,grip:pose.grip};
+            phaseStart=now;lastPhaseName=nx.name;setStatus(nx.name+'…');
+          }
+          function frame(now){
+            if(seq){
+              var ph=seq.list[phaseIdx];
+              var p=clamp((now-phaseStart)/ph.dur,0,1),e=ease(p);
+              pose.tx=ph.from.tx+(ph.to.tx-ph.from.tx)*e;
+              pose.ty=ph.from.ty+(ph.to.ty-ph.from.ty)*e;
+              pose.grip=ph.from.grip+(ph.to.grip-ph.from.grip)*e;
+              if(p>=1)advance(now);
+            }
+            var s=ik(pose);
+            ua.setAttribute('x2',s.E.x);ua.setAttribute('y2',s.E.y);
+            fa.setAttribute('x1',s.E.x);fa.setAttribute('y1',s.E.y);
+            fa.setAttribute('x2',s.W.x);fa.setAttribute('y2',s.W.y);
+            ej.setAttribute('cx',s.E.x);ej.setAttribute('cy',s.E.y);
+            hand.setAttribute('transform','translate('+s.W.x+','+s.W.y+') rotate(90)');
+            var spread=14+6*pose.grip;
+            fg1.setAttribute('y2',-spread);fg2.setAttribute('y2',spread);
+            cans.forEach(function(c){
+              if(c.mode==='carried'){
+                c.x=s.W.x;c.y=s.W.y+26;
+              }else if(c.mode==='settle'){
+                var q=clamp((now-c.st)/380,0,1),qe=1-Math.pow(1-q,3);
+                c.x=c.sx+(c.tx-c.sx)*qe;c.y=c.sy+(c.ty-c.sy)*qe;
+                if(q>=1){c.mode='placed';updateCnt();}
+              }
+              canEls[c.i].setAttribute('transform','translate('+c.x+','+c.y+')');
+            });
+            var uDeg=(s.u*180/Math.PI),elbow=180-(s.f-s.u)*180/Math.PI;
+            tel.textContent='shoulder '+uDeg.toFixed(1)+'° · elbow '+elbow.toFixed(1)+'° · gripper '+(pose.grip>0.6?'open':pose.grip<0.25?'closed':'closing')+' · '+lastPhaseName;
+            requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+          canEls.forEach(function(el){
+            function grab(){
+              if(running)return;
+              var i=+el.getAttribute('data-i');
+              if(cans[i].mode==='placed'){setStatus(CANS[i].name+' is already packed');return;}
+              startSeq(grabPhases(i),null);
+            }
+            el.addEventListener('click',grab);
+            el.addEventListener('keydown',function(ev){
+              if(ev.key==='Enter'||ev.key===' '||ev.key==='Spacebar'){
+                ev.preventDefault();
+                grab();
+              }
+            });
+          });
+          demoBtn.addEventListener('click',function(){
+            if(running)return;
+            var queue=cans.filter(function(c){return c.mode!=='placed';}).map(function(c){return c.i;});
+            if(!queue.length){setStatus('all packed, reset to run again');return;}
+            var step=function(){
+              var i=queue.shift();
+              startSeq(grabPhases(i),queue.length?step:null);
+            };
+            step();
+          });
+          resetBtn.addEventListener('click',function(){
+            seq=null;running=false;demoBtn.disabled=false;
+            pose={tx:HOME.tx,ty:HOME.ty,grip:1};
+            cans.forEach(function(c,i){c.mode='idle';c.x=CANS[i].x;c.y=PLACED_Y;});
+            lastPhaseName='idle';setStatus('ready, click a can or run the demo');updateCnt();
+          });
+          updateCnt();
+          })();
+          </script>
+
           <div class="case-row">
             <div>
               <h3>PocketLab</h3>
