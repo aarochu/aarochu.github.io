@@ -585,8 +585,8 @@ body.view-terminal .view-toggle .dot {
   --dp-color-text-secondary: #52525b;
   --dp-color-text-tertiary: #8b8d98;
   --dp-color-text-quaternary: #b9bbc3;
-  --dp-color-surface: var(--paper-strong, #ffffff);
-  --dp-color-surface-muted: var(--paper, #f4f4f5);
+  --dp-color-surface: var(--paper, #faf6ef);
+  --dp-color-surface-muted: #f1eadf;
   --dp-color-surface-raised: var(--paper-strong, #ffffff);
   --dp-color-border: var(--line, #e4e4e7);
   --dp-color-accent: #2f6fed;
@@ -647,9 +647,10 @@ body.view-terminal .view-toggle .dot {
   max-width: 760px;
   aspect-ratio: 17 / 10;
   margin: 1.25rem 0 0;
+  border: 1px solid var(--dp-color-border);
   border-radius: 12px;
   overflow: hidden;
-  background: #08090b;
+  background: var(--dp-color-surface);
   cursor: grab;
 }
 
