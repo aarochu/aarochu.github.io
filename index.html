@@ -15,6 +15,14 @@
       if (saved === "terminal") document.documentElement.classList.add("boot-terminal");
     })();
   </script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body class="site-body">
   <button type="button" id="view-toggle" class="view-toggle" aria-label="Switch view">
@@ -333,6 +341,178 @@
               <a class="case-link" href="https://devpost.com/software/pocketlab-gvbmwd" target="_blank" rel="noopener noreferrer">DevPost ↗</a>
             </div>
           </div>
+
+          <div class="pl-hw-card" id="pocketlab-3d" role="img" aria-label="3D model of the PocketLab ESP32 sensor hub on a breadboard, drag to rotate"></div>
+          <script type="module">
+          import * as THREE from "three";
+          import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+          (function () {
+            const container = document.getElementById("pocketlab-3d");
+            let renderer;
+            try {
+              renderer = new THREE.WebGLRenderer({ antialias: true });
+            } catch (err) {
+              container.hidden = true;
+              return;
+            }
+
+            const BG = 0x08090b;
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(BG);
+            scene.fog = new THREE.Fog(BG, 18, 38);
+
+            const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+            camera.position.set(4.9, 4.5, 6.1);
+
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            container.appendChild(renderer.domElement);
+
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.06;
+            controls.enableZoom = false; // let the scroll wheel keep scrolling the page
+            controls.enablePan = false;
+            controls.target.set(0, 0.3, 0);
+
+            // Lighting
+            scene.add(new THREE.HemisphereLight(0xffffff, 0x17191d, 2.0));
+            const key = new THREE.DirectionalLight(0xffffff, 3);
+            key.position.set(4, 10, 6);
+            key.castShadow = true;
+            key.shadow.mapSize.set(2048, 2048);
+            scene.add(key);
+            const rim = new THREE.PointLight(0x69f0ae, 20, 20);
+            rim.position.set(-5, 4, -4);
+            scene.add(rim);
+
+            // Materials
+            const std = (opts) => new THREE.MeshStandardMaterial(opts);
+            const breadboardMat = std({ color: 0xf0f0e9, roughness: 0.65 });
+            const darkMat = std({ color: 0x16191d, roughness: 0.5, metalness: 0.2 });
+            const pcbMat = std({ color: 0x16261f, roughness: 0.6 });
+            const metalMat = std({ color: 0xb9bec5, metalness: 0.85, roughness: 0.25 });
+            const blackMat = std({ color: 0x111214, roughness: 0.4 });
+            const holeMat = std({ color: 0x222428, roughness: 0.8 });
+            const greenMat = std({ color: 0x69f0ae, emissive: 0x1e8b59, emissiveIntensity: 1.8 });
+            const redMat = std({ color: 0xff5252, emissive: 0x8c1515, emissiveIntensity: 0.8 });
+            const yellowMat = std({ color: 0xffd54f, emissive: 0x6b5010, emissiveIntensity: 0.7 });
+
+            function box(w, h, d, mat, x, y, z) {
+              const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+              mesh.position.set(x, y, z);
+              mesh.castShadow = true;
+              mesh.receiveShadow = true;
+              scene.add(mesh);
+              return mesh;
+            }
+
+            // Breadboard, power rails, holes
+            box(9, 0.35, 4.5, breadboardMat, 0, 0, 0);
+            for (const [z, mat] of [[1.82, redMat], [1.62, darkMat], [-1.82, redMat], [-1.62, darkMat]]) {
+              box(8.5, 0.04, 0.06, mat, 0, 0.2, z);
+            }
+            const holeGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.035, 8);
+            for (let x = -4; x <= 4; x += 0.22) {
+              for (let z = -1.3; z <= 1.3; z += 0.25) {
+                const hole = new THREE.Mesh(holeGeo, holeMat);
+                hole.rotation.x = Math.PI / 2;
+                hole.position.set(x, 0.2, z);
+                scene.add(hole);
+              }
+            }
+
+            // ESP32 board, metal shield, USB connector, header pins
+            box(2.6, 0.16, 1.25, pcbMat, 0.8, 0.38, 0);
+            box(1.05, 0.12, 0.65, metalMat, 0.55, 0.52, 0);
+            box(0.42, 0.22, 0.55, metalMat, 2.15, 0.5, 0);
+            for (let i = -5; i <= 5; i++) {
+              const x = 0.8 + i * 0.18;
+              box(0.04, 0.35, 0.04, metalMat, x, 0.55, -0.68);
+              box(0.04, 0.35, 0.04, metalMat, x, 0.55, 0.68);
+            }
+
+            // Sensor modules
+            function sensor(x, z, ledMat) {
+              box(0.95, 0.13, 0.75, pcbMat, x, 0.35, z);
+              box(0.28, 0.16, 0.28, blackMat, x, 0.47, z);
+              const led = new THREE.Mesh(new THREE.SphereGeometry(0.08, 16, 16), ledMat);
+              led.position.set(x + 0.28, 0.5, z);
+              scene.add(led);
+              for (let i = -1; i <= 1; i++) {
+                box(0.035, 0.25, 0.035, metalMat, x + i * 0.16, 0.5, z - 0.42);
+              }
+            }
+            sensor(-2.3, -0.3, greenMat); // IMU
+            sensor(-1.0, 0.8, yellowMat); // environmental
+            sensor(2.9, 0.55, greenMat);
+
+            // Ultrasonic sensor
+            box(1.55, 0.16, 0.65, pcbMat, -3.3, 0.45, 0);
+            for (const x of [-3.72, -2.88]) {
+              const can = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.2, 32), metalMat);
+              can.rotation.z = Math.PI / 2;
+              can.position.set(x, 0.62, 0);
+              can.castShadow = true;
+              scene.add(can);
+            }
+
+            // Buzzer
+            const buzzer = new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.27, 0.2, 32), darkMat);
+            buzzer.position.set(-1.7, 0.43, -1.0);
+            scene.add(buzzer);
+
+            // Jumper wires and USB cable
+            function wire(points, color, thickness = 0.035) {
+              const curve = new THREE.CatmullRomCurve3(points.map(([x, y, z]) => new THREE.Vector3(x, y, z)));
+              const mesh = new THREE.Mesh(
+                new THREE.TubeGeometry(curve, 32, thickness, 8, false),
+                std({ color, roughness: 0.4, metalness: 0.1 })
+              );
+              mesh.castShadow = true;
+              scene.add(mesh);
+            }
+            wire([[-3.7, 0.38, 1.55], [-3.3, 1.0, 1.4], [-2.5, 1.15, 0.8], [-1.5, 0.55, 0.7]], 0xff5252);
+            wire([[-1.0, 0.48, 0.5], [-0.7, 1.1, 0.8], [0.0, 1.25, 0.6], [0.6, 0.55, 0.6]], 0xffd54f);
+            wire([[-2.3, 0.5, -0.6], [-1.8, 1.2, -0.8], [-0.8, 1.4, -0.8], [0.5, 0.55, -0.65]], 0x69f0ae);
+            wire([[2.9, 0.48, 0.2], [3.4, 1.0, -0.1], [3.7, 1.15, -0.8], [2.5, 0.55, -0.7]], 0x42a5f5);
+            wire([[2.35, 0.48, 0], [3.5, 0.8, 0], [4.8, 0.9, 0], [5.5, 0.7, 0]], 0xd8d8d8, 0.09);
+
+            // Ground
+            const ground = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), std({ color: BG, roughness: 1 }));
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -0.35;
+            ground.receiveShadow = true;
+            scene.add(ground);
+
+            scene.rotation.y = -0.35;
+
+            function resize() {
+              const w = container.clientWidth, h = container.clientHeight;
+              if (!w || !h) return;
+              camera.aspect = w / h;
+              camera.updateProjectionMatrix();
+              renderer.setSize(w, h);
+            }
+            new ResizeObserver(resize).observe(container);
+            resize();
+
+            // Only render while the card is on screen
+            let frameId = 0;
+            function animate() {
+              frameId = requestAnimationFrame(animate);
+              controls.update();
+              renderer.render(scene, camera);
+            }
+            new IntersectionObserver(([entry]) => {
+              cancelAnimationFrame(frameId);
+              if (entry.isIntersecting) animate();
+            }).observe(container);
+          })();
+          </script>
           <div class="case-row">
             <div>
               <h3>Zipply</h3>

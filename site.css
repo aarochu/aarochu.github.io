@@ -641,3 +641,22 @@ body.view-terminal .view-toggle .dot {
   outline: 2px solid var(--dp-color-accent);
   outline-offset: 4px;
 }
+
+/* ── PocketLab 3D hardware model ── */
+.pl-hw-card {
+  max-width: 760px;
+  aspect-ratio: 17 / 10;
+  margin: 1.25rem 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #08090b;
+  cursor: grab;
+}
+
+.pl-hw-card:active {
+  cursor: grabbing;
+}
+
+.pl-hw-card canvas {
+  display: block;
+}
