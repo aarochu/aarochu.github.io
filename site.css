@@ -62,7 +62,7 @@ body.site-body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.1rem 10rem 1.1rem var(--space-page);
+  padding: 1.1rem var(--space-page);
   background: rgba(250, 246, 239, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
@@ -100,51 +100,6 @@ body.site-body {
 
 .site-nav-links a:hover {
   color: var(--accent-dark);
-}
-
-/* ── View toggle (shared, fixed) ── */
-.view-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 999;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 0.85rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--paper-strong);
-  color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(32, 29, 26, 0.08);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.view-toggle:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 22px rgba(32, 29, 26, 0.14);
-}
-
-.view-toggle .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-2);
-}
-
-body.view-terminal .view-toggle {
-  background: #0d1510;
-  color: #b8f5c8;
-  border-color: #1f4d2a;
-}
-
-body.view-terminal .view-toggle .dot {
-  background: #00ff41;
 }
 
 /* ── Hero ── */
