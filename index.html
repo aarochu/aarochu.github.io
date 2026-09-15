@@ -128,6 +128,186 @@
           </div>
           <div class="case-row">
             <div>
+              <h3>Knowsy</h3>
+              <p>Interactive 5-stage RISC-V pipeline simulator for Knowsy, an open-source educational platform led by Professor Dov Kruger. Students type a program and watch RAW and control hazards, stall bubbles, forwarding paths, and branch mispredictions play out cycle by cycle, with processor-handled and compiler-handled modes. Led a team of 5 for development of the module.</p>
+            </div>
+            <a class="case-link" href="https://github.com/RU-EducationalPlatform" target="_blank" rel="noopener noreferrer">GitHub org ↗</a>
+          </div>
+
+          <div class="dp-demo-card" id="ph-card">
+            <style>
+              #ph-card { --ph-control: #e5832e; }
+              #ph-card .ph-scenarios { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+              #ph-card .arm-btn[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--dp-color-text-primary); }
+              #ph-card .ph-col, #ph-card .ph-arrow { transition: opacity 0.25s ease; }
+              #ph-card .ph-now { fill: color-mix(in srgb, var(--dp-chart-1) 9%, transparent); }
+              @media (prefers-reduced-motion: reduce) { #ph-card .ph-col, #ph-card .ph-arrow { transition: none; } }
+            </style>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
+              <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">Pipeline Hazard Demo</span>
+              <span id="ph-st" style="font-size:14px;color:var(--dp-color-text-secondary);">ready, pick a scenario or run the demo</span>
+            </div>
+            <div class="ph-scenarios" role="group" aria-label="Scenario">
+              <button type="button" class="arm-btn" data-ph-s="0" aria-pressed="true">No forwarding</button>
+              <button type="button" class="arm-btn" data-ph-s="1" aria-pressed="false">Forwarding</button>
+              <button type="button" class="arm-btn" data-ph-s="2" aria-pressed="false">Load-use</button>
+              <button type="button" class="arm-btn" data-ph-s="3" aria-pressed="false">Branch miss</button>
+            </div>
+            <svg id="ph-scene" viewBox="0 0 680 170" style="width:100%;display:block;" role="img" aria-label="Pipeline timing table"></svg>
+            <p id="ph-note" aria-live="polite" style="margin:10px 0 0;min-height:2.9em;font-size:14px;line-height:1.45;color:var(--dp-color-text-secondary);"></p>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;">
+              <button type="button" id="ph-run" class="arm-btn primary">Run demo</button>
+              <button type="button" id="ph-step" class="arm-btn">Step</button>
+              <button type="button" id="ph-reset" class="arm-btn">Reset</button>
+              <span id="ph-cnt" style="font-size:14px;color:var(--dp-color-text-secondary);margin-left:auto;">cycle 0 / 10</span>
+            </div>
+            <div id="ph-tel" style="font-family:var(--dp-font-mono,monospace);font-size:12px;color:var(--dp-color-text-tertiary);margin-top:8px;"></div>
+          </div>
+          <script>
+          (function(){
+          // Timing tables produced by the lab's own simulate() for these four programs.
+          var DATA=[{"id":"nofwd","label":"No forwarding","program":[{"raw":"add  x1, x2, x3","spec":false,"squashed":false},{"raw":"sub  x4, x1, x5","spec":false,"squashed":false},{"raw":"addi x6, x7, 8","spec":false,"squashed":false},{"raw":"add  x8, x9, x10","spec":false,"squashed":false}],"stages":[["IF","ID","EX","MEM","WB","","","","",""],["","IF","ID","stall","stall","EX","MEM","WB","",""],["","","IF","stall","stall","ID","EX","MEM","WB",""],["","","","","","IF","ID","EX","MEM","WB"]],"cells":[[1,3,"r"],[1,4,"r"]],"fwd":[],"events":[[3,"stall","sub  x4, x1, x5 is held in ID: x1 is written by add  x1, x2, x3 in WB (cycle 5). A bubble goes into EX."],[4,"stall","sub  x4, x1, x5 is held in ID: x1 is written by add  x1, x2, x3 in WB (cycle 5). A bubble goes into EX."],[4,"writeback","add  x1, x2, x3 writes x1 in the first half of WB, so sub  x4, x1, x5 can read it in ID during the second half."]],"hazards":1,"totalCycles":10,"idealCycles":8,"cpi":1.5},{"id":"fwd","label":"Forwarding","program":[{"raw":"add  x1, x2, x3","spec":false,"squashed":false},{"raw":"sub  x4, x1, x5","spec":false,"squashed":false},{"raw":"addi x6, x7, 8","spec":false,"squashed":false},{"raw":"add  x8, x9, x10","spec":false,"squashed":false}],"stages":[["IF","ID","EX","MEM","WB","","",""],["","IF","ID","EX","MEM","WB","",""],["","","IF","ID","EX","MEM","WB",""],["","","","IF","ID","EX","MEM","WB"]],"cells":[],"fwd":[[0,2,1,3,"EX->EX","x1"]],"events":[[3,"forward","EX→EX: x1 travels from add  x1, x2, x3 (EX/MEM register) into sub  x4, x1, x5's EX stage."]],"hazards":1,"totalCycles":8,"idealCycles":8,"cpi":1},{"id":"loaduse","label":"Load-use","program":[{"raw":"lw   x1, 0(x2)","spec":false,"squashed":false},{"raw":"add  x3, x1, x4","spec":false,"squashed":false},{"raw":"sub  x5, x3, x1","spec":false,"squashed":false},{"raw":"addi x6, x7, 1","spec":false,"squashed":false}],"stages":[["IF","ID","EX","MEM","WB","","","",""],["","IF","ID","stall","EX","MEM","WB","",""],["","","IF","stall","ID","EX","MEM","WB",""],["","","","","IF","ID","EX","MEM","WB"]],"cells":[[1,3,"r"]],"fwd":[[0,3,1,4,"MEM->EX","x1"],[1,4,2,5,"EX->EX","x3"]],"events":[[3,"stall","add  x3, x1, x4 is held in ID: lw   x1, 0(x2) only has x1 at the end of MEM (cycle 4). A bubble goes into EX."],[4,"forward","MEM→EX: x1 travels from lw   x1, 0(x2) (MEM/WB register) into add  x3, x1, x4's EX stage."],[5,"forward","EX→EX: x3 travels from add  x3, x1, x4 (EX/MEM register) into sub  x5, x3, x1's EX stage."]],"hazards":2,"totalCycles":9,"idealCycles":8,"cpi":1.25},{"id":"branch","label":"Branch miss","program":[{"raw":"addi x1, x0, 4","spec":false,"squashed":false},{"raw":"addi x2, x0, 4","spec":false,"squashed":false},{"raw":"beq  x1, x2, target","spec":false,"squashed":false},{"raw":"add  x3, x1, x2","spec":true,"squashed":true},{"raw":"add  x6, x1, x1","spec":false,"squashed":false},{"raw":"sub  x7, x6, x1","spec":false,"squashed":false}],"stages":[["IF","ID","EX","MEM","WB","","","","","",""],["","IF","ID","EX","MEM","WB","","","","",""],["","","IF","ID","stall","EX","MEM","WB","","",""],["","","","IF","stall","flush","","","","",""],["","","","","","IF","ID","EX","MEM","WB",""],["","","","","","","IF","ID","EX","MEM","WB"]],"cells":[[2,4,"r"],[3,5,"c"]],"fwd":[[1,3,2,4,"EX->ID","x2"],[4,7,5,8,"EX->EX","x6"]],"events":[[4,"stall","beq  x1, x2, target is held in ID: addi x2, x0, 4 was still computing x2 in EX. A bubble goes into EX."],[4,"forward","EX→ID: x2 travels from addi x2, x0, 4 (EX/MEM register) into beq  x1, x2, target's ID stage."],[4,"resolve","beq  x1, x2, target is decided in ID: taken, but the pipeline guessed not taken. Mispredicted."],[5,"flush","Flushing 1 wrong-path instruction: add  x3, x1, x2. Those cycles are wasted."],[8,"forward","EX→EX: x6 travels from add  x6, x1, x1 (EX/MEM register) into sub  x7, x6, x1's EX stage."]],"hazards":3,"totalCycles":11,"idealCycles":9,"cpi":1.4}];
+          var SUMMARY={
+            nofwd:'sub reads x1 right after add writes it. With no forwarding it waits in ID for 2 cycles: 10 cycles instead of 8.',
+            fwd:'Same program with forwarding: x1 goes EX→EX straight into sub, so nothing stalls. 8 cycles, CPI 1.00.',
+            loaduse:'lw only has x1 after MEM, so add still stalls once, then takes it MEM→EX. 9 cycles instead of 8.',
+            branch:'beq waits a cycle for x2, then is taken while the pipeline guessed not taken, so the wrong-path add is flushed. 11 cycles instead of 9.'
+          };
+          var INTRO={
+            nofwd:'Back-to-back R-type instructions with forwarding off.',
+            fwd:'The same R-type program with forwarding on.',
+            loaduse:'A load followed immediately by a read of the loaded register.',
+            branch:'A taken branch under a predict-not-taken strategy.'
+          };
+          var NS='http://www.w3.org/2000/svg';
+          var W=680,LABEL=172,TOP=26,ROW=30,PAD=6;
+          var MAXC=DATA.reduce(function(m,s){return Math.max(m,s.totalCycles);},0);
+          var CW=(W-LABEL-PAD)/MAXC;
+          var TINT={IF:9,ID:16,EX:23,MEM:30,WB:37};
+          var PRIORITY={flush:0,resolve:1,stall:2,freeze:3,stale:4,forward:5,writeback:6};
+          var card=document.getElementById('ph-card');
+          var svg=document.getElementById('ph-scene');
+          var st=document.getElementById('ph-st'),note=document.getElementById('ph-note');
+          var cnt=document.getElementById('ph-cnt'),tel=document.getElementById('ph-tel');
+          var runBtn=document.getElementById('ph-run'),stepBtn=document.getElementById('ph-step'),resetBtn=document.getElementById('ph-reset');
+          var scenarioBtns=[].slice.call(card.querySelectorAll('[data-ph-s]'));
+          var s=DATA[0],cycle=-1,timer=null,cols=[],arrows=[],heads=[],nowRect=null;
+
+          function node(name,attrs,text){
+            var n=document.createElementNS(NS,name);
+            for(var k in attrs)n.setAttribute(k,attrs[k]);
+            if(text!=null)n.textContent=text;
+            return n;
+          }
+          function clean(t){return String(t).replace(/\s+/g,' ');}
+          function mix(color,pct){return 'color-mix(in srgb,'+color+' '+pct+'%,var(--dp-color-surface))';}
+          function colX(c){return LABEL+c*CW;}
+          function rowY(r){return TOP+r*ROW;}
+
+          function build(){
+            svg.textContent='';
+            cols=[];arrows=[];heads=[];
+            var rows=s.program.length,h=TOP+rows*ROW+PAD;
+            svg.setAttribute('viewBox','0 0 '+W+' '+h);
+            var defs=node('defs'),marker=node('marker',{id:'ph-arrowhead',viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'6',markerHeight:'6',orient:'auto-start-reverse'});
+            marker.appendChild(node('path',{d:'M0 0L10 5L0 10z',fill:'var(--dp-chart-1)'}));
+            defs.appendChild(marker);svg.appendChild(defs);
+            nowRect=node('rect',{'class':'ph-now',x:0,y:4,width:CW,height:h-6,rx:4,visibility:'hidden'});
+            svg.appendChild(nowRect);
+            for(var c=0;c<s.totalCycles;c++){
+              var head=node('text',{x:colX(c)+CW/2,y:TOP-9,'text-anchor':'middle','font-size':'11','font-family':'var(--dp-font-mono,monospace)',fill:'var(--dp-color-text-tertiary)'},String(c+1));
+              heads.push(head);svg.appendChild(head);
+            }
+            s.program.forEach(function(p,r){
+              svg.appendChild(node('line',{x1:0,x2:W-PAD,y1:rowY(r)+ROW,y2:rowY(r)+ROW,stroke:'var(--dp-color-border)','stroke-width':'1'}));
+              var label=node('text',{x:0,y:rowY(r)+ROW/2+4,'font-size':'12','font-family':'var(--dp-font-mono,monospace)',fill:p.squashed?'var(--dp-color-text-tertiary)':'var(--dp-color-text-primary)'},clean(p.raw));
+              if(p.squashed)label.setAttribute('text-decoration','line-through');
+              svg.appendChild(label);
+            });
+            var marks={};
+            s.cells.forEach(function(m){marks[m[0]+':'+m[1]]=m[2];});
+            for(var col=0;col<s.totalCycles;col++){
+              var g=node('g',{'class':'ph-col',opacity:'0'});
+              for(var row=0;row<rows;row++){
+                var v=s.stages[row][col];
+                if(!v)continue;
+                var x=colX(col)+2,y=rowY(row)+3,w=CW-4,hh=ROW-6;
+                var fill,text,color='var(--dp-color-text-primary)';
+                if(v==='stall'){fill='var(--dp-color-surface-muted)';text='—';color='var(--dp-color-text-tertiary)';}
+                else if(v==='flush'){fill=mix('var(--dp-chart-2)',18);text='×';color='var(--dp-chart-2)';}
+                else{fill=mix('var(--dp-color-text-primary)',TINT[v]||12);text=v;}
+                var mark=marks[row+':'+col];
+                var rect=node('rect',{x:x,y:y,width:w,height:hh,rx:4,fill:fill});
+                if(mark){rect.setAttribute('stroke',mark==='r'?'var(--dp-chart-2)':'var(--ph-control)');rect.setAttribute('stroke-width','2');}
+                g.appendChild(rect);
+                g.appendChild(node('text',{x:x+w/2,y:y+hh/2+4,'text-anchor':'middle','font-size':'11','font-weight':'600','font-family':'var(--dp-font-mono,monospace)',fill:color},text));
+              }
+              cols.push(g);svg.appendChild(g);
+            }
+            s.fwd.forEach(function(f){
+              var x1=colX(f[1])+CW-6,y1=rowY(f[0])+ROW/2,x2=colX(f[3])+8,y2=rowY(f[2])+ROW/2;
+              var bend=Math.max(14,Math.abs(y2-y1)*0.4);
+              var g=node('g',{'class':'ph-arrow',opacity:'0'});
+              g.appendChild(node('path',{d:'M'+x1+' '+y1+' C'+(x1+bend)+' '+y1+','+(x2-bend)+' '+y2+','+x2+' '+y2,fill:'none',stroke:'var(--dp-chart-1)','stroke-width':'2','marker-end':'url(#ph-arrowhead)'}));
+              g.appendChild(node('text',{x:Math.max(x1,x2)+CW*0.55,y:(y1+y2)/2+4,'font-size':'10','font-weight':'600','font-family':'var(--dp-font-mono,monospace)',fill:'var(--dp-chart-1)',stroke:'var(--dp-color-surface)','stroke-width':'3','stroke-linejoin':'round','paint-order':'stroke'},f[4].replace('->','→')+' '+f[5]));
+              arrows.push({g:g,cycle:f[3]});svg.appendChild(g);
+            });
+            tel.textContent=(s.idealCycles-4)+' instructions · '+s.totalCycles+' cycles vs '+s.idealCycles+' ideal · CPI '+s.cpi.toFixed(2)+' · '+s.hazards+' hazard'+(s.hazards===1?'':'s');
+          }
+
+          function narration(){
+            if(cycle<0)return INTRO[s.id]+' Run the demo to watch it one clock cycle at a time.';
+            var events=s.events.filter(function(e){return e[0]===cycle;}).sort(function(a,b){return PRIORITY[a[1]]-PRIORITY[b[1]];});
+            if(cycle===s.totalCycles-1&&!timer)return SUMMARY[s.id];
+            if(!events.length)return 'Cycle '+(cycle+1)+': every instruction moves forward one stage.';
+            return events.slice(0,2).map(function(e){return clean(e[2]);}).join(' ');
+          }
+
+          function update(){
+            var last=s.totalCycles-1;
+            cols.forEach(function(g,c){g.setAttribute('opacity',c<=cycle?'1':'0');});
+            arrows.forEach(function(a){a.g.setAttribute('opacity',cycle>=a.cycle?'1':'0');});
+            heads.forEach(function(t,c){t.setAttribute('fill',c===cycle?'var(--dp-color-text-primary)':'var(--dp-color-text-tertiary)');t.setAttribute('font-weight',c===cycle?'700':'400');});
+            nowRect.setAttribute('visibility',cycle>=0?'visible':'hidden');
+            if(cycle>=0)nowRect.setAttribute('x',colX(cycle));
+            var kinds=s.events.filter(function(e){return e[0]===cycle;}).map(function(e){return e[1];});
+            st.textContent=cycle<0?'ready, pick a scenario or run the demo':(cycle===last&&!timer?'done':'cycle '+(cycle+1)+(kinds.length?' · '+kinds[0]:''));
+            note.textContent=narration();
+            cnt.textContent='cycle '+(cycle+1)+' / '+s.totalCycles;
+            runBtn.disabled=!!timer;
+            stepBtn.disabled=!!timer||cycle>=last;
+            resetBtn.disabled=cycle<0&&!timer;
+            svg.setAttribute('aria-label',s.label+' pipeline timing table, cycle '+(cycle+1)+' of '+s.totalCycles);
+          }
+
+          function stop(){if(timer){clearInterval(timer);timer=null;}}
+          function advance(){
+            if(cycle<s.totalCycles-1)cycle++;
+            if(cycle>=s.totalCycles-1)stop();
+            update();
+          }
+          function run(){
+            stop();cycle=-1;update();
+            timer=setInterval(advance,750);
+            update();
+          }
+          function reset(){stop();cycle=-1;update();}
+          function choose(i){
+            stop();s=DATA[i];cycle=-1;
+            scenarioBtns.forEach(function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false');});
+            build();update();
+          }
+
+          runBtn.addEventListener('click',run);
+          stepBtn.addEventListener('click',function(){stop();advance();});
+          resetBtn.addEventListener('click',reset);
+          scenarioBtns.forEach(function(b){b.addEventListener('click',function(){choose(+b.getAttribute('data-ph-s'));});});
+          choose(0);
+          })();
+          </script>
+
+          <div class="case-row">
+            <div>
               <h3>DeskPartner</h3>
               <p>An overhead camera and VLM planner drive a reBot B601-DM arm to autonomously sort a desk zone into trash, pen cup, and tray, running closed-loop until the desk is clean. Won Honorable Mention at the Embodied Metal Hackathon, hosted by Mission Robotics, New Theory, Savant, and North Star.</p>
             </div>
