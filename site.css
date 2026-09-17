@@ -370,6 +370,15 @@ body.site-body {
   padding-left: 0.4rem;
 }
 
+.case-row--paired {
+  border-bottom: none;
+}
+
+.case-group {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
 .case-row h3 {
   margin: 0 0 0.3rem;
   font-size: 1.05rem;
