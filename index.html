@@ -123,6 +123,61 @@
           <div class="case-group">
           <div class="case-row case-row--paired">
             <div>
+              <h3>DirecSun</h3>
+              <p>A desk-sized CubeSat for prototyping spacecraft attitude control, built with one other member of the STAR CubeSat team at Rutgers. A brushless motor spins a flywheel inside a 3D-printed 2U frame, 100 x 100 x 227 mm, so speeding the wheel up turns the whole box the other way, the same trick a satellite uses to point without thrusters. An ESP32-S3 closes the loop at 500 Hz from a gyro, a magnetometer, and a two-element sun sensor, and talks to a browser ground station over Wi-Fi. It is a trainer, not flight hardware.</p>
+            </div>
+          </div>
+
+          <div class="dp-demo-card">
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+              <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">Hardware Stack</span>
+              <span style="font-size:14px;color:var(--dp-color-text-secondary);">drag to turn, scroll to zoom, click a deck to isolate it, or pull the stack apart with the explode slider</span>
+            </div>
+            <div id="direcsun-3d" class="ds-viewer"></div>
+          </div>
+
+          <details class="case-details">
+            <summary>How DirecSun works</summary>
+
+            <h4>Why it matters</h4>
+            <p>A satellite has nothing to push against, so it points by trading angular momentum with a wheel inside itself. Most students only ever meet that idea as a diagram. DirecSun puts it on a desk, where you can watch a sensor drift, watch a controller fight it, and see why a spacecraft needs a heartbeat and an e-stop. We built it for student teams, CubeSat clubs, outreach demos, and anyone prototyping pointing logic or ground software.</p>
+
+            <h4>How it works</h4>
+            <ol>
+              <li>The physics. Motor torque spins the flywheel up, and the box takes an equal torque the other way, so it turns opposite to any change in wheel speed. A wheel held at a steady speed does not turn the box at all.</li>
+              <li>Bias speed. The wheel idles at 2400 rpm, the middle of its 800 to 4000 rpm range, so it can speed up or slow down to turn the box either way without ever reversing. The ESC is sensorless and stutters near zero speed, which is why the wheel never stops.</li>
+              <li>A cascade running at 500 Hz. Heading error feeds a P controller, which commands a box rate. A PI controller on the gyro rate turns that into torque, torque becomes a wheel-speed reference, and a feed-forward table plus a PI loop on the Hall sensor speed sets the throttle to the ESC. It is PI, not PID. Design gains are k_psi 3.1, k_omega 0.0129, k_i 0.0163.</li>
+              <li>Sensors. An MPU-6050 gyro and accelerometer, a QMC5883P magnetometer, and a BMP280 barometer share one 400 kHz I2C bus at 0x68, 0x2C, and 0x77. An A1104 Hall switch on a pin interrupt reads wheel speed from magnet passes, two OP550 phototransistors give sun angle as (A - B) / (A + B), and a 100k/22k divider on the ADC reads battery voltage. The barometer stays out of the control loop.</li>
+              <li>Modes. SAFE with the motor off, then arm, then SPINUP while a printed lock pin holds the box and the wheel ramps to bias speed, then READY, the gateway to everything else. From READY we can detumble a spin back to zero rate, hold a captured heading against pokes, slew to a commanded heading on a 60 deg/s and 120 deg/s<sup>2</sup> ramp, point at a lamp, or drive throttle, wheel speed, or box rate by hand.</li>
+              <li>Safety. A 1 s heartbeat, an e-stop, a battery interlock that arms above 9.6 V and trips below 8.8 V, a 4000 rpm wheel cap holding about 5.7 J, overspeed and underspeed checks, a 30 degree tilt trip, a control-stall watchdog, and the lock pin during spin-up. E-stop and disarm both ramp the motor down over about 5 s, and e-stop latches a flag where disarm does not.</li>
+            </ol>
+
+            <h4>How we built it</h4>
+            <ul>
+              <li>Mechanical. Every printed part comes out of one parametric CadQuery script driven by a single shared set of dimensions, and an assembly check plants six deliberate collisions to prove it can still catch an overlap. The box turns on two 608 bearings riding a fixed M8 bolt.</li>
+              <li>Firmware. ESP-IDF v6.0 and C++17. The control logic lives in a core library that includes no ESP-IDF headers, so it runs on a laptop under host tests. Those tests plant deliberate mutant safety faults and fail unless the right test catches each one.</li>
+              <li>Ground station. React and TypeScript with a three.js landing page, talking JSON over a WebSocket. One schema defines the contract, and the firmware, the mock box, and the UI all have to match it.</li>
+              <li>Process. We wrote the spec first and had Claude Code agents build against written specs and test lists. The whole stack ran against a mock box, with a recorder driving the real UI through its own buttons and checking every message.</li>
+            </ul>
+
+            <h4>What was hard</h4>
+            <ul>
+              <li>Printing and fabrication took far longer than the code. We measured parts instead of trusting spec sheets. The motor shaft thread is 6.76 mm, not the roughly 13 mm our first flywheel plan assumed, the washers are 37.88 mm across, and an AA cell is 50.17 mm long.</li>
+              <li>We printed small tests that each answered one question: a bearing fit test where only the 22.4 mm pocket held a 608, a hole gauge that came out loose on the rod hole and tight on the M2 pilot, a hole ladder that settled on a 2.5 mm pilot and a 4.8 mm rod hole, and a washer stack test to rehearse the mid-print pause. The printer ran about 0.4 mm small on holes, so one compensation constant in the CAD fixed all of them.</li>
+              <li>Hardware did not match its spec sheets. The ESCs twitched the motor at zero throttle on DShot150. DShot300 held one ESC still for about 30 s in testing, and our log says plainly that we never explained why.</li>
+              <li>Battery readings were wrong until we calibrated the divider against a meter. A floating ground and the wrong firmware on a swapped board were behind it.</li>
+              <li>Control timing slipped once Wi-Fi came up. Keeping the control tick in IRAM fixed it, and the worst tick stayed under 1 ms across a 45 minute soak with no client connected.</li>
+              <li>Chrome slows hidden tabs, which delayed the heartbeat and tripped the safety timeout. We moved the heartbeat into a Web Worker.</li>
+            </ul>
+
+            <h4>What is next</h4>
+            <p>An Xbox controller in the browser through the Gamepad API. Push the stick to set where the box points, and when you let go it returns to its original orientation. It reuses the manual and slew commands we already have, with the e-stop and heartbeat still in place.</p>
+          </details>
+          </div>
+
+          <div class="case-group">
+          <div class="case-row case-row--paired">
+            <div>
               <h3>Tokeneyezed</h3>
               <p>Keeps a long-running coding agent on track toward a hard metric across compactions, crashes, and even a handoff to a different agent, while an observer blocks cheating and destructive steps and every attempt is stored in MongoDB Atlas so the plan can adapt when progress stalls. Built the memory and data layer end to end: embeddings, attempt ledger, bounded context builder, memory compactor, and retrieval eval. Built in a team of 4 for MongoDB's Harness Engineering &amp; Model Wrangling hackathon.</p>
             </div>
@@ -873,6 +928,7 @@ flowchart TD
     <footer class="site-footer">Aaron Chu, built with plain HTML, CSS, and JS.</footer>
   </div>
 
+  <script src="direcsun-3d.js" defer></script>
   <script src="site-reveal.js"></script>
 </body>
 </html>
