@@ -9,3 +9,6 @@ desktop.ini
 # Editor / IDE
 .vscode/
 .cursor/
+
+# Claude Code
+.claude/

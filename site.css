@@ -468,14 +468,6 @@ body.site-body {
   transform: translateY(-2px);
 }
 
-/* ── Footer ── */
-.site-footer {
-  padding: 1.5rem var(--space-page) 2.5rem;
-  text-align: center;
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
 /* ── Scroll reveal ── */
 @media (prefers-reduced-motion: no-preference) {
   #site-view .reveal {

@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="site.css?v=20261013b" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@500;600;700&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script type="importmap">
     {
       "imports": {
@@ -16,7 +15,6 @@
       }
     }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
 </head>
 <body class="site-body">
   <div id="site-view">
@@ -51,7 +49,7 @@
           </p>
         </div>
         <div class="site-hero-photo-wrap">
-          <img src="me.png" alt="Aaron Chu" />
+          <img src="me.webp" width="840" height="1818" alt="Aaron Chu" />
           <span class="site-hero-tag">Bay Area → Rutgers</span>
         </div>
       </div>
@@ -263,8 +261,9 @@ flowchart TD
             <button type="button" id="tz-diagram-toggle" class="arm-btn" style="margin-top:10px;">Expand diagram</button>
           </div>
           <script>
+            function renderTzDiagram() {
             mermaid.initialize({
-              startOnLoad: true,
+              startOnLoad: false,
               theme: "base",
               themeVariables: {
                 fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
@@ -279,6 +278,20 @@ flowchart TD
               },
               flowchart: { curve: "basis" }
             });
+            mermaid.run({ querySelector: "#tz-diagram-wrap .mermaid" });
+            }
+            (function () {
+              var target = document.getElementById("tz-diagram-wrap");
+              var io = new IntersectionObserver(function (entries) {
+                if (!entries.some(function (e) { return e.isIntersecting; })) return;
+                io.disconnect();
+                var s = document.createElement("script");
+                s.src = "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js";
+                s.onload = renderTzDiagram;
+                document.head.appendChild(s);
+              }, { rootMargin: "400px" });
+              io.observe(target);
+            })();
             (function () {
               var wrap = document.getElementById("tz-diagram-wrap");
               var fade = document.getElementById("tz-diagram-fade");
@@ -682,7 +695,7 @@ flowchart TD
           <div class="case-row">
             <div>
               <h3>VeriStudent</h3>
-              <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat.</p>
+              <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat. 30 students have signed up.</p>
             </div>
             <a class="case-link" href="https://veristudent.vercel.app/login" target="_blank" rel="noopener noreferrer">View live ↗</a>
           </div>
@@ -701,10 +714,17 @@ flowchart TD
 
           <div class="pl-hw-card" id="pocketlab-3d" role="img" aria-label="3D model of the PocketLab ESP32 sensor hub on a breadboard, drag to rotate, scroll to zoom"></div>
           <script type="module">
-          import * as THREE from "three";
-          import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+          const lazyContainer = document.getElementById("pocketlab-3d");
+          const lazyObserver = new IntersectionObserver(async (entries) => {
+            if (!entries.some((e) => e.isIntersecting)) return;
+            lazyObserver.disconnect();
+            const THREE = await import("three");
+            const { OrbitControls } = await import("three/addons/controls/OrbitControls.js");
+            initPocketLab(THREE, OrbitControls);
+          }, { rootMargin: "400px" });
+          lazyObserver.observe(lazyContainer);
 
-          (function () {
+          function initPocketLab(THREE, OrbitControls) {
             const container = document.getElementById("pocketlab-3d");
             let renderer;
             try {
@@ -867,27 +887,10 @@ flowchart TD
               cancelAnimationFrame(frameId);
               if (entry.isIntersecting) animate();
             }).observe(container);
-          })();
+          }
           </script>
           </div>
 
-          <div class="case-row">
-            <div>
-              <h3>Zipply</h3>
-              <p>Real-time chat app built on React and Firebase, with auth, instant messaging, and responsive design.</p>
-            </div>
-            <div class="case-links">
-              <a class="case-link" href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Watch demo ↗</a>
-              <a class="case-link" href="https://github.com/aarochu/Zipply" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-            </div>
-          </div>
-          <div class="case-row">
-            <div>
-              <h3>SuperHearo</h3>
-              <p>Team of 4, Android app pairing voice control and speech recognition to help elderly and blind users with daily tasks.</p>
-            </div>
-            <a class="case-link" href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-          </div>
         </div>
       </div>
     </section>
@@ -897,17 +900,14 @@ flowchart TD
         <div class="section-kicker"><h2>Basketball</h2></div>
         <p class="site-section-lede">A few highlights from the court.</p>
         <div class="reel-grid">
-          <video controls>
+          <video controls preload="none">
             <source src="hoops.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          <video controls>
+          <video controls preload="none">
             <source src="hoops2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
-          <video controls>
+          <video controls preload="none">
             <source src="hoops3.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
           </video>
         </div>
       </div>
@@ -919,14 +919,13 @@ flowchart TD
         <div class="contact-block">
           <a class="contact-email" href="mailto:aaronchu022@gmail.com">aaronchu022@gmail.com</a>
           <div class="contact-icon-row">
-            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="github.com/aarochu"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="linkedin.com/in/achu02"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="github.com/aarochu"><svg viewBox="0 0 496 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></a>
+            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="linkedin.com/in/achu02"><svg viewBox="0 0 448 512" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="site-footer">Aaron Chu, built with plain HTML, CSS, and JS.</footer>
   </div>
 
   <script src="direcsun-3d.js?v=20261013b" defer></script>
