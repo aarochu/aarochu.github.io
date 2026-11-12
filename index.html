@@ -3,145 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aaron Chu – Portfolio</title>
-  <link rel="stylesheet" href="site.css?v=20261013b" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@500;600;700&family=Fraunces:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Aaron Chu</title>
+  <meta name="description" content="Aaron Chu, Computer Engineering at Rutgers. Robots, embedded systems, and full-stack projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Doto:wght@400;600;700;900&family=Silkscreen&display=swap" />
+  <link rel="stylesheet" href="site.css" />
+  <link rel="stylesheet" href="crt.css" />
   <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
-      }
-    }
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/" } }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
 </head>
-<body class="site-body">
-  <div id="site-view">
-    <nav class="site-nav">
-      <a class="site-nav-brand" href="#top">aaron<span>.chu</span></a>
-      <ul class="site-nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#basketball">Basketball</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
-      </ul>
-    </nav>
+<body class="crt">
+  <a class="skip-link" href="#work-index" data-jump="work">Skip to projects</a>
 
-    <header class="site-hero" id="top">
-      <div class="wrap site-hero-grid">
-        <div>
-          <p class="site-eyebrow">Rutgers · Computer Engineering</p>
-          <h1>Hi, I'm Aaron<br /><em>(初荣恩).</em></h1>
-          <p class="site-hero-lede">I build things. Some of them run on a server, some of them run on a basketball court, and one of them runs on a pair of clippers. Based between the Bay Area and New Brunswick, NJ.</p>
-          <div class="site-cta-row">
-            <a class="btn btn-primary" href="#projects">View projects</a>
-            <a class="btn btn-ghost" href="AaronChu2026.pdf" target="_blank" rel="noopener noreferrer">Resume ↗</a>
-          </div>
-          <p class="hero-meta">
-            <span><strong>CE</strong> @ Rutgers</span>
-            <span class="sep">/</span>
-            <span>self-taught barber since <strong>2023</strong></span>
-            <span class="sep">/</span>
-            <span>Hooper</span>
-          </p>
-        </div>
-        <div class="site-hero-photo-wrap">
-          <img src="me.png" alt="Aaron Chu" />
-          <span class="site-hero-tag">Bay Area → Rutgers</span>
-        </div>
-      </div>
-    </header>
+  <canvas id="crt-canvas" aria-hidden="true"></canvas>
 
-    <section class="site-section" id="about">
-      <div class="wrap">
-        <div class="section-kicker"><h2>About</h2></div>
-        <div class="about-grid">
-          <p class="site-section-lede">I'm from the Bay Area, studying Computer Engineering with a minor in Computer Science at Rutgers. I like building projects that help others out, not just ones that run on my machine. Outside of school I love to play basketball. I've played all my life on high school teams, intramural teams, and the Rutgers club team for a year. I also picked up barbering as a self-taught skill in 2023, and I've built a steady client base ever since.</p>
-          <div class="about-tags">
-            <span class="tag-line">Full Stack Development</span>
-            <span class="tag-line">Embedded Systems</span>
-            <span class="tag-line">Machine Learning</span>
-            <span class="tag-line">Physical AI</span>
-          </div>
-        </div>
-      </div>
+  <header class="hud-top">
+    <a class="hud-brand" href="#hero" data-jump="home" data-scramble>Aaron Chu</a>
+    <div class="hud-actions">
+      <button type="button" class="hud-btn" data-jump="contact"><span class="talk-dot" aria-hidden="true"></span>Contact</button>
+      <button type="button" class="hud-btn" id="menu-open" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hud-section hud-hero" id="hero" data-section="hero">
+      <h1 class="hero-name"><strong data-scramble>Aaron Chu</strong><span class="hero-sub"><span data-scramble>// portfolio</span><span>&copy;2026</span></span></h1>
+      <p class="hero-tag">From firmware to full-stack, I build things people use.</p>
+      <p class="hero-hint">Scroll</p>
     </section>
 
-    <section class="site-section" id="experience">
-      <div class="wrap">
-        <div class="section-kicker"><h2>Experience</h2></div>
-        <ul class="exp-list">
-          <li class="exp-entry">
-            <span class="exp-role-group">
-              <img class="exp-logo" src="magnefy.jpg" alt="" aria-hidden="true" />
-              <span class="exp-role">Software Engineer Intern <span class="exp-at">@ Magnefy</span></span>
-            </span>
-            <span class="exp-dates">Jun. 2026 – Aug. 2026</span>
-          </li>
-          <li class="exp-entry">
-            <span class="exp-role-group">
-              <img class="exp-logo" src="trainify.jpg" alt="" aria-hidden="true" />
-              <span class="exp-role">Intern <span class="exp-at">@ Trainify Labs Inc</span></span>
-            </span>
-            <span class="exp-dates">Apr. 2026 – Jun. 2026</span>
-          </li>
-          <li class="exp-entry">
-            <span class="exp-role-group">
-              <img class="exp-logo" src="rutgersece.jpg" alt="" aria-hidden="true" />
-              <span class="exp-role">Undergraduate Research Assistant <span class="exp-at">@ Rutgers Electrical and Computer Engineering</span></span>
-            </span>
-            <span class="exp-dates">Dec. 2025 – Present</span>
-          </li>
-          <li class="exp-entry">
-            <span class="exp-role-group">
-              <img class="exp-logo" src="universitynanosatelliteprogram.jpg" alt="" aria-hidden="true" />
-              <span class="exp-role">Deputy Lead Systems Integration Engineer <span class="exp-at">@ University Nanosatellite Program</span></span>
-            </span>
-            <span class="exp-dates">Sep. 2025 – Present</span>
-          </li>
-          <li class="exp-entry">
-            <span class="exp-role-group">
-              <img class="exp-logo" src="integem.jpg" alt="" aria-hidden="true" />
-              <span class="exp-role">Drone Support Intern <span class="exp-at">@ Integem</span></span>
-            </span>
-            <span class="exp-dates">Jun. 2025 – Aug. 2025</span>
-          </li>
+    <section class="hud-section hud-work" id="work-index" data-section="work" aria-label="Projects">
+      <p class="work-label" data-scramble>Projects</p>
+      <ol class="work-list" id="work-list">
+        <li><button type="button" data-open="water-sommelier">[01] Water Sommelier</button></li>
+        <li><button type="button" data-open="direcsun">[02] DirecSun</button></li>
+        <li><button type="button" data-open="tokeneyezed">[03] Tokeneyezed</button></li>
+        <li><button type="button" data-open="deskpartner">[04] DeskPartner</button></li>
+        <li><button type="button" data-open="knowsy">[05] Knowsy</button></li>
+        <li><button type="button" data-open="veristudent">[06] VeriStudent</button></li>
+        <li><button type="button" data-open="pocketlab">[07] PocketLab</button></li>
+        <li><button type="button" data-open="zipply">[08] Zipply</button></li>
+        <li><button type="button" data-open="superhearo">[09] SuperHearo</button></li>
+      </ol>
+    </section>
+
+    <section class="hud-section hud-copy" id="about" data-section="about">
+      <h2 data-scramble>About me</h2>
+      <p class="lead">I'm from the Bay Area, studying Computer Engineering with a minor in Computer Science at Rutgers.</p>
+      <p>I like building projects that help others out, not just ones that run on my machine. Outside of school I love to play basketball. I've played all my life on high school teams, intramural teams, and the Rutgers club team for a year. I also picked up barbering as a self-taught skill in 2023, and I've built a steady client base ever since.</p>
+      <button type="button" class="more" data-open="about">Experience</button>
+      <button type="button" class="more" data-open="hoops">Hoops</button>
+      <a class="more" href="AaronChu2026.pdf" target="_blank" rel="noopener">Resume</a>
+    </section>
+
+    <section class="hud-section hud-contact" id="contact" data-section="contact">
+      <div class="contact-main">
+        <p class="contact-sub" data-scramble>Get in touch</p>
+        <h2 class="contact-big"><a href="mailto:aaronchu022@gmail.com">Let's talk.</a></h2>
+        <p class="contact-sub"><a href="mailto:aaronchu022@gmail.com">aaronchu022@gmail.com</a></p>
+        <ul class="socials">
+          <li><a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="AaronChu2026.pdf" target="_blank" rel="noopener">Resume</a></li>
         </ul>
       </div>
+      <footer class="crt-footer">
+        <span>Aaron Chu &copy;2026</span>
+        <button type="button" data-jump="home">Scroll back ^</button>
+      </footer>
     </section>
+  </main>
 
-    <section class="site-section" id="projects">
-      <div class="wrap">
-        <div class="section-kicker"><h2>Projects</h2></div>
+  <div class="cursor-label" id="cursor-label" aria-hidden="true">Open project</div>
 
-        <div class="case-list">
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>Water Sommelier</h3>
-              <p>A two-arm robot that picks up a glass water bottle, holds it steady, unscrews the cap, and drops the cap in the trash, built with a team of 3 for Viam's "Code That Moves" robot hackathon. Two xArm6 arms with wrist-mounted RealSense cameras replay taught keyframes while vision measures where the bottle and cap are, and the final demo ran end to end on the real arms. Built the Streamlit control dashboard and keyframe format, diagnosed motion-planner failures on the real arms, and fixed a bottle-tracking bug that made detections jump between bottles.</p>
-            </div>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <button type="button" class="menu-close" id="menu-close">Close</button>
+    <p class="menu-brand">Aaron Chu</p>
+    <ul class="menu-list">
+      <li><button type="button" data-jump="home"><span>Home</span><span>01</span></button></li>
+      <li><button type="button" data-jump="work"><span>Work</span><span>02</span></button></li>
+      <li><button type="button" data-jump="about"><span>About</span><span>03</span></button></li>
+      <li><button type="button" data-open="about"><span>Experience</span><span>04</span></button></li>
+      <li><button type="button" data-open="hoops"><span>Hoops</span><span>05</span></button></li>
+      <li><button type="button" data-jump="contact"><span>Contact</span><span>06</span></button></li>
+      <li><a href="AaronChu2026.pdf" target="_blank" rel="noopener"><span>Resume</span><span>07</span></a></li>
+    </ul>
+    <ul class="menu-socials">
+      <li><a href="mailto:aaronchu022@gmail.com">Email</a></li>
+      <li><a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+    </ul>
+    <div class="menu-foot"><span>Rutgers Computer Engineering</span><span>&copy;2026</span></div>
+  </div>
+
+  <div class="panels">
+
+    <article class="panel" id="panel-water-sommelier" role="dialog" aria-modal="true" aria-labelledby="t-water-sommelier" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 01 of 09</p>
+        <h2 class="panel-title" id="t-water-sommelier">Water Sommelier</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>A two-arm robot that picks up a glass water bottle, holds it steady, unscrews the cap, and drops the cap in the trash, built with a team of 3 for Viam's "Code That Moves" robot hackathon. Two xArm6 arms with wrist-mounted RealSense cameras replay taught keyframes while vision measures where the bottle and cap are, and the final demo ran end to end on the real arms. Built the Streamlit control dashboard and keyframe format, diagnosed motion-planner failures on the real arms, and fixed a bottle-tracking bug that made detections jump between bottles.</p>
           </div>
-
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>Viam Python SDK</li><li>xArm6</li><li>Intel RealSense</li><li>Streamlit</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Team of 3. Built for Viam's Code That Moves.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://www.youtube.com/watch?v=EDScdOhUuEo" target="_blank" rel="noopener noreferrer">Demo video</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="video-card">
             <iframe src="https://www.youtube-nocookie.com/embed/EDScdOhUuEo" title="Water Sommelier demo video" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>DirecSun</h3>
-              <p>A desk-sized CubeSat for prototyping spacecraft attitude control, built with one other member of the STAR CubeSat team at Rutgers. A brushless motor spins a flywheel inside a 3D-printed 2U frame, 100 x 100 x 227 mm, so speeding the wheel up turns the whole box the other way, the same trick a satellite uses to point without thrusters. An ESP32-S3 closes the loop at 500 Hz from a gyro, a magnetometer, and a two-element sun sensor, and talks to a browser ground station over Wi-Fi. It is a trainer, not flight hardware.</p>
-            </div>
-            <a class="case-link" href="https://github.com/aarochu/DirecSun" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+    <article class="panel" id="panel-direcsun" role="dialog" aria-modal="true" aria-labelledby="t-direcsun" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 02 of 09</p>
+        <h2 class="panel-title" id="t-direcsun">DirecSun</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>A desk-sized CubeSat for prototyping spacecraft attitude control, built with one other member of the STAR CubeSat team at Rutgers. A brushless motor spins a flywheel inside a 3D-printed 2U frame, 100 x 100 x 227 mm, so speeding the wheel up turns the whole box the other way, the same trick a satellite uses to point without thrusters. An ESP32-S3 closes the loop at 500 Hz from a gyro, a magnetometer, and a two-element sun sensor, and talks to a browser ground station over Wi-Fi. It is a trainer, not flight hardware.</p>
           </div>
-
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>ESP32-S3</li><li>ESP-IDF / C++17</li><li>React + TypeScript</li><li>three.js</li><li>CadQuery</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Team of 2. STAR CubeSat.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/aarochu/DirecSun" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="dp-demo-card">
             <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
               <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">Hardware Stack</span>
@@ -149,7 +159,6 @@
             </div>
             <div id="direcsun-3d" class="ds-viewer"></div>
           </div>
-
           <details class="case-details">
             <summary>How DirecSun works</summary>
 
@@ -187,17 +196,34 @@
             <h4>What is next</h4>
             <p>An Xbox controller in the browser through the Gamepad API. Push the stick to set where the box points, and when you let go it returns to its original orientation. It reuses the manual and slew commands we already have, with the e-stop and heartbeat still in place.</p>
           </details>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>Tokeneyezed</h3>
-              <p>Keeps a long-running coding agent on track toward a hard metric across compactions, crashes, and even a handoff to a different agent, while an observer blocks cheating and destructive steps and every attempt is stored in MongoDB Atlas so the plan can adapt when progress stalls. Built the memory and data layer end to end: embeddings, attempt ledger, bounded context builder, memory compactor, and retrieval eval. Built in a team of 4 for MongoDB's Harness Engineering &amp; Model Wrangling hackathon.</p>
-            </div>
-            <a class="case-link" href="https://github.com/ja-zoe/tokeneyezed" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+    <article class="panel" id="panel-tokeneyezed" role="dialog" aria-modal="true" aria-labelledby="t-tokeneyezed" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 03 of 09</p>
+        <h2 class="panel-title" id="t-tokeneyezed">Tokeneyezed</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Keeps a long-running coding agent on track toward a hard metric across compactions, crashes, and even a handoff to a different agent, while an observer blocks cheating and destructive steps and every attempt is stored in MongoDB Atlas so the plan can adapt when progress stalls. Built the memory and data layer end to end: embeddings, attempt ledger, bounded context builder, memory compactor, and retrieval eval. Built in a team of 4 for MongoDB's Harness Engineering &amp; Model Wrangling hackathon.</p>
           </div>
-
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>MongoDB Atlas</li><li>LangGraph</li><li>Voyage embeddings</li><li>Python</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Team of 4.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/ja-zoe/tokeneyezed" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="dp-demo-card">
             <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
               <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">Control Loop</span>
@@ -277,18 +303,18 @@ flowchart TD
           </div>
           <script>
             mermaid.initialize({
-              startOnLoad: true,
+              startOnLoad: false,
               theme: "base",
               themeVariables: {
                 fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
                 fontSize: "13px",
-                primaryColor: "#f1eadf",
-                primaryTextColor: "#201d1a",
-                primaryBorderColor: "#e7ded0",
-                lineColor: "#6f6a60",
-                secondaryColor: "#faf6ef",
-                tertiaryColor: "#ffffff",
-                edgeLabelBackground: "#faf6ef"
+                primaryColor: "#1a1d1f",
+                primaryTextColor: "#e9ecee",
+                primaryBorderColor: "#3a3f43",
+                lineColor: "#8d969c",
+                secondaryColor: "#141618",
+                tertiaryColor: "#0e0f10",
+                edgeLabelBackground: "#141618"
               },
               flowchart: { curve: "basis" }
             });
@@ -311,20 +337,34 @@ flowchart TD
               });
             })();
           </script>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>DeskPartner</h3>
-              <p>An overhead camera and VLM planner drive a reBot B601-DM arm to autonomously sort a desk zone into trash, pen cup, and tray, running closed-loop until the desk is clean. Won Honorable Mention at the Embodied Metal Hackathon, hosted by Mission Robotics, New Theory, Savant, and North Star.</p>
-            </div>
-            <div class="case-links">
-              <a class="case-link" href="https://github.com/aarochu/DeskPartner" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-              <a class="case-link" href="https://youtube.com/shorts/zeixiu9j7FE" target="_blank" rel="noopener noreferrer">Data Collection Demo ↗</a>
-            </div>
+    <article class="panel" id="panel-deskpartner" role="dialog" aria-modal="true" aria-labelledby="t-deskpartner" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 04 of 09</p>
+        <h2 class="panel-title" id="t-deskpartner">DeskPartner</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>An overhead camera and VLM planner drive a reBot B601-DM arm to autonomously sort a desk zone into trash, pen cup, and tray, running closed-loop until the desk is clean. Won Honorable Mention at the Embodied Metal Hackathon, hosted by Mission Robotics, New Theory, Savant, and North Star.</p>
           </div>
-
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>reBot B601-DM</li><li>VLM planner</li><li>Overhead camera</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Honorable Mention, Embodied Metal Hackathon.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/aarochu/DeskPartner" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://www.youtube.com/shorts/zeixiu9j7FE" target="_blank" rel="noopener noreferrer">Data collection video</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="dp-demo-card">
             <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px;">
               <span style="font-size:17px;font-weight:500;color:var(--dp-color-text-primary);">DeskPartner Demo</span>
@@ -509,16 +549,34 @@ flowchart TD
           updateCnt();
           })();
           </script>
-          </div>
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>Knowsy</h3>
-              <p>Interactive 5-stage RISC-V pipeline simulator for Knowsy, an open-source educational platform led by Professor Dov Kruger. Students type a program and watch RAW and control hazards, stall bubbles, forwarding paths, and branch mispredictions play out cycle by cycle, with processor-handled and compiler-handled modes. Led a team of 5 for development of the module.</p>
-            </div>
-            <a class="case-link" href="https://github.com/RU-EducationalPlatform" target="_blank" rel="noopener noreferrer">GitHub org ↗</a>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
+    <article class="panel" id="panel-knowsy" role="dialog" aria-modal="true" aria-labelledby="t-knowsy" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 05 of 09</p>
+        <h2 class="panel-title" id="t-knowsy">Knowsy</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Interactive 5-stage RISC-V pipeline simulator for Knowsy, an open-source educational platform led by Professor Dov Kruger. Students type a program and watch RAW and control hazards, stall bubbles, forwarding paths, and branch mispredictions play out cycle by cycle, with processor-handled and compiler-handled modes. Led a team of 5 for development of the module.</p>
+          </div>
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>RISC-V</li><li>Pipeline simulation</li><li>Education</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Led a team of 5. Platform led by Prof. Dov Kruger.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/RU-EducationalPlatform" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="dp-demo-card" id="ph-card">
             <style>
               #ph-card { --ph-control: #e5832e; }
@@ -690,28 +748,58 @@ flowchart TD
           choose(0);
           })();
           </script>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
-          <div class="case-row">
-            <div>
-              <h3>VeriStudent</h3>
-              <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat.</p>
-            </div>
-            <a class="case-link" href="https://veristudent.vercel.app/login" target="_blank" rel="noopener noreferrer">View live ↗</a>
+    <article class="panel" id="panel-veristudent" role="dialog" aria-modal="true" aria-labelledby="t-veristudent" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 06 of 09</p>
+        <h2 class="panel-title" id="t-veristudent">VeriStudent</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Marketplace for college students to safely buy and sell textbooks and find sublets, with .edu-locked sign-in. React/Expo frontend, Supabase Postgres backend with real-time chat.</p>
           </div>
-
-          <div class="case-group">
-          <div class="case-row case-row--paired">
-            <div>
-              <h3>PocketLab</h3>
-              <p>Built with a team of 4, PocketLab turns a $10 ESP32 into a real-time IoT science lab: a React/TypeScript web app streams live sensor data over WebSockets into Recharts and Three.js visualizations. Includes guided, step-by-step experiment templates with noise filtering, offline fallback, and data export.</p>
-            </div>
-            <div class="case-links">
-              <a class="case-link" href="https://github.com/ja-zoe/pocket-lab" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-              <a class="case-link" href="https://devpost.com/software/pocketlab-gvbmwd" target="_blank" rel="noopener noreferrer">DevPost ↗</a>
-            </div>
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>React / Expo</li><li>Supabase</li><li>Postgres</li></ul>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://veristudent.vercel.app/login" target="_blank" rel="noopener noreferrer">Live site</a></li></ul>
           </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
+    <article class="panel" id="panel-pocketlab" role="dialog" aria-modal="true" aria-labelledby="t-pocketlab" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 07 of 09</p>
+        <h2 class="panel-title" id="t-pocketlab">PocketLab</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Built with a team of 4, PocketLab turns a $10 ESP32 into a real-time IoT science lab: a React/TypeScript web app streams live sensor data over WebSockets into Recharts and Three.js visualizations. Includes guided, step-by-step experiment templates with noise filtering, offline fallback, and data export.</p>
+          </div>
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>ESP32</li><li>React + TypeScript</li><li>WebSockets</li><li>Recharts</li><li>three.js</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Team of 4.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/ja-zoe/pocket-lab" target="_blank" rel="noopener noreferrer">GitHub</a></li><li><a href="https://devpost.com/software/pocketlab-gvbmwd" target="_blank" rel="noopener noreferrer">Devpost</a></li></ul>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="pl-hw-card" id="pocketlab-3d" role="img" aria-label="3D model of the PocketLab ESP32 sensor hub on a breadboard, drag to rotate, scroll to zoom"></div>
           <script type="module">
           import * as THREE from "three";
@@ -882,67 +970,104 @@ flowchart TD
             }).observe(container);
           })();
           </script>
-          </div>
+        </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
+      </div>
+    </article>
 
-          <div class="case-row">
-            <div>
-              <h3>Zipply</h3>
-              <p>Real-time chat app built on React and Firebase, with auth, instant messaging, and responsive design.</p>
-            </div>
-            <div class="case-links">
-              <a class="case-link" href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Watch demo ↗</a>
-              <a class="case-link" href="https://github.com/aarochu/Zipply" target="_blank" rel="noopener noreferrer">Repository ↗</a>
-            </div>
+    <article class="panel" id="panel-zipply" role="dialog" aria-modal="true" aria-labelledby="t-zipply" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 08 of 09</p>
+        <h2 class="panel-title" id="t-zipply">Zipply</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Real-time chat app built on React and Firebase, with auth, instant messaging, and responsive design.</p>
           </div>
-          <div class="case-row">
-            <div>
-              <h3>SuperHearo</h3>
-              <p>Team of 4, Android app pairing voice control and speech recognition to help elderly and blind users with daily tasks.</p>
-            </div>
-            <a class="case-link" href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">Repository ↗</a>
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>React</li><li>Firebase</li></ul>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://youtu.be/cMtewBdzU84" target="_blank" rel="noopener noreferrer">Demo video</a></li><li><a href="https://github.com/aarochu/Zipply" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul>
           </div>
         </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
       </div>
-    </section>
+    </article>
 
-    <section class="site-section" id="basketball">
-      <div class="wrap">
-        <div class="section-kicker"><h2>Basketball</h2></div>
-        <p class="site-section-lede">A few highlights from the court.</p>
-        <div class="reel-grid">
-          <video controls>
-            <source src="hoops.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <video controls>
-            <source src="hoops2.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <video controls>
-            <source src="hoops3.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </section>
-
-    <section class="site-section" id="contact">
-      <div class="wrap">
-        <div class="section-kicker"><h2>Contact</h2></div>
-        <div class="contact-block">
-          <a class="contact-email" href="mailto:aaronchu022@gmail.com">aaronchu022@gmail.com</a>
-          <div class="contact-icon-row">
-            <a href="https://github.com/aarochu" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="github.com/aarochu"><i class="fab fa-github" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/achu02/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="linkedin.com/in/achu02"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+    <article class="panel" id="panel-superhearo" role="dialog" aria-modal="true" aria-labelledby="t-superhearo" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Project / 09 of 09</p>
+        <h2 class="panel-title" id="t-superhearo">SuperHearo</h2>
+        <div class="panel-grid">
+          <div>
+            <p class="panel-label">Info</p>
+            <p>Team of 4, Android app pairing voice control and speech recognition to help elderly and blind users with daily tasks.</p>
+          </div>
+          <div>
+            <p class="panel-label">Stack</p>
+            <ul class="panel-tags"><li>Android</li><li>Speech recognition</li></ul>
+            <p class="panel-label">Team</p>
+            <p>Team of 4.</p>
+            <p class="panel-label">Links</p>
+            <ul class="panel-links"><li><a href="https://github.com/joshnaim1/SuperHearo" target="_blank" rel="noopener noreferrer">GitHub</a></li></ul>
           </div>
         </div>
+        <nav class="panel-nav" aria-label="More projects">
+          <button type="button" data-prev>&lt; Prev</button>
+          <button type="button" data-next>Next &gt;</button>
+        </nav>
       </div>
-    </section>
+    </article>
 
-    <footer class="site-footer">Aaron Chu, built with plain HTML, CSS, and JS.</footer>
+    <article class="panel" id="panel-about" role="dialog" aria-modal="true" aria-labelledby="t-about" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">About</p>
+        <h2 class="panel-title" id="t-about">Experience</h2>
+        <ul class="xp-list">
+          <li><span class="xp-who"><img src="magnefy.jpg" alt="" /><span>Software Engineer Intern <span>@ Magnefy</span></span></span><span class="xp-when">Jun. 2026 – Aug. 2026</span></li>
+          <li><span class="xp-who"><img src="trainify.jpg" alt="" /><span>Intern <span>@ Trainify Labs Inc</span></span></span><span class="xp-when">Apr. 2026 – Jun. 2026</span></li>
+          <li><span class="xp-who"><img src="rutgersece.jpg" alt="" /><span>Undergraduate Research Assistant <span>@ Rutgers Electrical and Computer Engineering</span></span></span><span class="xp-when">Dec. 2025 – Present</span></li>
+          <li><span class="xp-who"><img src="universitynanosatelliteprogram.jpg" alt="" /><span>Deputy Lead Systems Integration Engineer <span>@ University Nanosatellite Program</span></span></span><span class="xp-when">Sep. 2025 – Present</span></li>
+          <li><span class="xp-who"><img src="integem.jpg" alt="" /><span>Drone Support Intern <span>@ Integem</span></span></span><span class="xp-when">Jun. 2025 – Aug. 2025</span></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="panel" id="panel-hoops" role="dialog" aria-modal="true" aria-labelledby="t-hoops" hidden>
+      <div class="panel-inner">
+        <button type="button" class="panel-close" data-close>Close [esc]</button>
+        <p class="panel-meta">Off the clock</p>
+        <h2 class="panel-title" id="t-hoops">Hoops</h2>
+        <p>A few highlights from the court.</p>
+        <div class="reel">
+          <video controls preload="none" src="hoops.mp4"></video>
+          <video controls preload="none" src="hoops2.mp4"></video>
+          <video controls preload="none" src="hoops3.mp4"></video>
+        </div>
+      </div>
+    </article>
   </div>
 
   <script src="direcsun-3d.js?v=20261013b" defer></script>
-  <script src="site-reveal.js"></script>
+  <script type="module" src="crt.js"></script>
+  <script>
+    setTimeout(function () {
+      if (!window.__crtReady) {
+        document.body.classList.add("no-webgl");
+        var l = document.getElementById("loader");
+        if (l) l.classList.add("is-done");
+      }
+    }, 8000);
+  </script>
 </body>
 </html>
