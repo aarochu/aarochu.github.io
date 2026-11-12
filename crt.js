@@ -239,9 +239,9 @@ const TURN = { src: "me-turn.png", tileW: 216, tileH: 242, perRow: 6, count: 19,
 /* Cool monochrome ramp: slate shadows -> pale cyan highlights (sRGB). */
 const TONE = [
   [0.0, [0.035, 0.05, 0.06]],
-  [0.35, [0.16, 0.23, 0.26]],
-  [0.7, [0.5, 0.63, 0.66]],
-  [1.0, [0.86, 0.95, 0.94]],
+  [0.35, [0.15, 0.23, 0.22]],
+  [0.7, [0.48, 0.64, 0.6]],
+  [1.0, [0.86, 0.97, 0.9]],
 ];
 function tone(t, out, o) {
   let k = 1;
@@ -437,7 +437,7 @@ function buildWall(face, groupY, d, tanH, aspect) {
   for (let i = 0; i < nx; i++) for (let j = 0; j < ny; j++) cell(ox + i * base, oy + j * base, base, 0);
   const geo = new THREE.BufferGeometry();
   geo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
-  return new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0x8e9498, transparent: true, opacity: 0.8 }));
+  return new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0x7f908a, transparent: true, opacity: 0.8 }));
 }
 
 /* ---------- project screen artwork ---------- */
@@ -840,7 +840,7 @@ async function main() {
 
   /* face scene */
   const faceScene = new THREE.Scene();
-  faceScene.background = new THREE.Color(0x020203);
+  faceScene.background = new THREE.Color(0x020303);
   const faceCam = new THREE.PerspectiveCamera(30, 1, 0.1, 60);
   faceScene.add(new THREE.AmbientLight(0xcfe3ea, 0.9));
   const key = new THREE.DirectionalLight(0xeaf6f6, 3.6);
@@ -861,10 +861,10 @@ async function main() {
   const world = new THREE.Scene();
   world.background = new THREE.Color(0x050505);
   const BG = {
-    dark: new THREE.Color(0x050505),
-    light: new THREE.Color(0xc3c5c6),
-    about: new THREE.Color(0x17181a),
-    end: new THREE.Color(0x060606),
+    dark: new THREE.Color(0x060808),
+    light: new THREE.Color(0xb3bab6),
+    about: new THREE.Color(0x0d1210),
+    end: new THREE.Color(0x050706),
   };
   const cam = new THREE.PerspectiveCamera(40, 1, 0.05, 100);
 

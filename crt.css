@@ -946,3 +946,58 @@ body.crt.no-webgl .hud-copy {
     animation: none;
   }
 }
+
+/* ── Colour scheme: dystopian Y2K (acid lime + chrome on green-black) ── */
+:root {
+  --crt-bg: #060808;
+  --crt-fg: #e4ece8;
+  --crt-dim: #7d8a85;
+  --crt-line: #1f2826;
+  --crt-green: #c8ff2e;
+  --acid: #c8ff2e;
+  --chrome: linear-gradient(180deg, #ffffff 0%, #dfe7e4 30%, #8e9d98 48%, #3c4845 52%, #c6d3cf 70%, #ffffff 100%);
+}
+
+::selection {
+  background: var(--acid);
+  color: #050605;
+}
+
+.talk-dot {
+  box-shadow: 0 0 6px var(--acid);
+}
+
+.hero-name strong,
+.contact-big a,
+.panel-title {
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.hero-tag {
+  text-shadow: 0 0 10px rgba(200, 255, 46, 0.18);
+}
+
+.menu-list button:hover,
+.menu-list button:focus-visible,
+.menu-list a:hover,
+.menu-list a:focus-visible,
+.skip-link {
+  background: var(--acid);
+  color: #050605;
+}
+
+.panel {
+  --accent: #c8ff2e;
+  --accent-dark: #c8ff2e;
+}
+
+.panel-links a::before,
+.socials a::before,
+.menu-socials a::before,
+.hud-copy .more::before {
+  color: var(--acid);
+}
